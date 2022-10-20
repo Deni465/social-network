@@ -20,11 +20,48 @@ export default class Registration extends React.Component {
         return (
             <>
                 <h2>{"Registration"}</h2>
-                <form action="">
-                    <label htmlFor="email">Email</label>
-                    <input type="text" name="email" id="" />
-                    <button onClick={this.submitForm}>Register</button>
-                </form>
+                <img
+                    src="https://i.pinimg.com/564x/71/d5/23/71d52372f850b616abfedcd7515f802c.jpg"
+                    alt="olives"
+                />
+                <div>
+                    <form action="">
+                        <div id="firstform">
+                            <label htmlFor="first">First Name</label>
+                            <input
+                                type="text"
+                                name="first"
+                                id="first"
+                                placeholder="Mary"
+                            />
+                            <label htmlFor="last">Last Name</label>
+                            <input
+                                type="text"
+                                name="last"
+                                id="last"
+                                placeholder="McOlive"
+                            />
+                        </div>
+                        <div id="secondform">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="text"
+                                name="email"
+                                id="email"
+                                placeholder="mary@mcolive.com"
+                            />
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="text"
+                                name="password"
+                                id="password"
+                                placeholder="password"
+                            />
+                        </div>
+
+                        <button onClick={this.submitForm}>Register</button>
+                    </form>
+                </div>
             </>
         );
     }
