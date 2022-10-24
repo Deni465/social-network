@@ -1,13 +1,16 @@
 import ReactDOM from "react-dom";
-import Welcome from "./components/Welcome/welcome.jsx";
+import Welcome from "./components/welcome.jsx";
+import Logo from "./components/logo.jsx";
 
 ReactDOM.render(<Welcome />, document.querySelector("main"));
 
-// function HelloWorld() {
-//     return (
-//         <>
-//             <h1>Welcome</h1>
-//             <Registration />
-//         </>
-//     );
-// }
+fetch("/user/id.json")
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("data", data);
+        if (!data.userId) {
+            ReactDOM.render(<Welcome />, document.querySelector("main"));
+        } else {
+            ReactDOM.render(<Logo />, document.querySelector("main"));
+        }
+    });

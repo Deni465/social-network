@@ -8,7 +8,11 @@ const db = require("./db");
 
 app.use(compression());
 
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
+
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
     cookieSession({
@@ -17,6 +21,33 @@ app.use(
         sameSite: true,
     })
 );
+
+app.post("/register", (req, res) => {
+    // console.log("Yes, register");
+    const { first, last, email, password } = req.body;
+    // console.log("req.body", req.body);
+    db.createUser(first, last, email, password)
+        .then((id) => {
+            req.session.userId = id;
+            res.json({
+                success: true,
+                message: "Registration successfull",
+            });
+        })
+        .catch((error) => {
+            res.json({
+                success: false,
+                message: error,
+            });
+        });
+});
+
+app.get("/user/id.json", (req, res) => {
+    console.log("userId", req.session.userId);
+    if (req.session.userId) {
+        return res.json({ userId: req.session.userId });
+    }
+});
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
