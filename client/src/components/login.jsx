@@ -1,45 +1,32 @@
 import React from "react";
 
-export default class Registration extends React.Component {
+export default class Login extends React.Component {
     constructor() {
         super();
         this.state = {
-            first: "",
-            last: "",
             email: "",
             password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFirstChange = this.handleFirstChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleFirstChange(e) {
-        // console.log("value: ", e.target.value);
-        this.setState({
-            first: e.target.value,
-        });
-    }
-    handleLastChange(e) {
-        console.log("value: ", e.target.value);
-        this.setState({
-            last: e.target.value,
-        });
-    }
     handleEmailChange(e) {
-        console.log("value: ", e.target.value);
+        // console.log("value: ", e.target.value);
         this.setState({
             email: e.target.value,
         });
     }
+
     handlePasswordChange(e) {
-        console.log("value: ", e.target.value);
+        // console.log("value: ", e.target.value);
         this.setState({
             password: e.target.value,
         });
     }
 
     handleChange(event) {
-        console.log("value: ", event.target.value);
+        // console.log("value: ", event.target.value);
         // const target = event.target;
         const name = event.target.name;
         const value = event.target.value;
@@ -50,24 +37,19 @@ export default class Registration extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const newUser = {
-            first: this.state.first,
-            last: this.state.last,
-            email: this.state.email,
-            password: this.state.password,
-        };
-        console.log("New User: ", newUser);
-        console.log("Fetch register");
-        fetch("/register", {
+        const user = { email: this.state.email, password: this.state.password };
+        fetch("/login", {
             method: "POST",
-            body: JSON.stringify(newUser),
+            body: JSON.stringify(user),
             headers: { "Content-Type": "application/json" },
         })
             .then((res) => res.json())
             .then((data) => {
                 if (data.success == true) {
                     location.href = "/";
+                    console.log("Login succesfull!");
                 }
+                console.log("Sorry Login failed");
             })
             .catch((err) => console.log(err));
     }
@@ -75,29 +57,9 @@ export default class Registration extends React.Component {
     render() {
         return (
             <>
-                <h2>{"Registration"}</h2>
+                <h2>{"Login"}</h2>
                 <div>
                     <form action="POST" onSubmit={this.handleSubmit}>
-                        <div id="firstform">
-                            <label htmlFor="first">First Name</label>
-                            <input
-                                type="text"
-                                name="first"
-                                id="first"
-                                placeholder="Mary"
-                                value={this.state.first}
-                                onChange={this.handleChange}
-                            />
-                            <label htmlFor="last">Last Name</label>
-                            <input
-                                type="text"
-                                name="last"
-                                id="last"
-                                placeholder="McOlive"
-                                value={this.state.last}
-                                onChange={this.handleChange}
-                            />
-                        </div>
                         <div id="secondform">
                             <label htmlFor="email">Email</label>
                             <input
@@ -119,7 +81,7 @@ export default class Registration extends React.Component {
                             />
                         </div>
 
-                        <button type="submit">Register</button>
+                        <button type="submit">Login</button>
                     </form>
                 </div>
             </>

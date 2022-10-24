@@ -5,6 +5,6 @@ CREATE TABLE users(
     first VARCHAR(255) NOT NULL CHECK(first != ''),
     last VARCHAR(255) NOT NULL CHECK(last != ''),
     email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(60) NOT NULL,
+    password VARCHAR(60) NOT NULL CHECK(password != ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

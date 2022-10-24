@@ -42,6 +42,27 @@ app.post("/register", (req, res) => {
         });
 });
 
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    db.auth(email, password)
+        .then((authentication) => {
+            if (authentication.crypt) {
+                req.session.userId = authentication.user.id;
+            }
+
+            res.json({
+                success: true,
+                message: "Login successfull",
+            });
+        })
+        .catch((error) => {
+            res.json({
+                success: false,
+                message: error,
+            });
+        });
+});
+
 app.get("/user/id.json", (req, res) => {
     console.log("userId", req.session.userId);
     if (req.session.userId) {
