@@ -66,6 +66,10 @@ app.post("/login", (req, res) => {
 app.get("/user/id.json", (req, res) => {
     console.log("userId", req.session.userId);
     if (req.session.userId) {
+        // db.getUserById().then((data) => {
+        //     console.log(data);
+        //     res.json(data);
+        // });
         return res.json({ userId: req.session.userId });
     }
 });

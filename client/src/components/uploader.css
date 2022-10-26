@@ -1,0 +1,28 @@
+/* body.modal-open {
+    overflow: hidden;
+} */
+
+h4 {
+    cursor: pointer;
+    text-align: end;
+    margin: inherit;
+}
+
+.overlay {
+    position: fixed;
+    inset: -10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    width: 400px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}

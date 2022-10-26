@@ -1,13 +1,19 @@
 import { Component } from "react";
 import Logo from "./logo.jsx";
-import ProfilePic from "./profile-pic.jsx";
+import Profile from "./profile.jsx";
 import Uploader from "./uploader.jsx";
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            userName: "sally-jones",
+            user: {
+                first: "",
+                last: "",
+                email: "",
+                img_url: "",
+                bio: "",
+            },
             isPopupOpen: false,
         };
 
@@ -15,11 +21,24 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+        console.log("componentDidMount()");
         // fetch user info from server
-        // add it to the state!
+        // add it to the state
+        fetch("/user/id.json")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                this.setState({ user: data });
+                console.log("this.state.user :", this.state.user);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     togglePopup() {
+        console.log("togglePopup");
         this.setState({
             // set it to the opposite of its current value!
             isPopupOpen: !this.state.isPopupOpen,
@@ -38,12 +57,16 @@ export default class App extends Component {
             <>
                 <div className="navbar">
                     <Logo />
-                    <ProfilePic
-                        userName={this.state.userName}
+                    <Profile
+                        first={this.state.user.first}
+                        last={this.state.user.last}
                         togglePopup={this.togglePopup}
                     />
                     {this.state.isPopupOpen && (
-                        <Uploader setProfilePic={this.setProfilePic} />
+                        <Uploader
+                            setProfilePic={this.setProfilePic}
+                            togglePopup={this.togglePopup}
+                        />
                     )}
                 </div>
                 <hr />

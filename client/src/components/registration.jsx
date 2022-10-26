@@ -14,7 +14,7 @@ export default class Registration extends React.Component {
     }
 
     handleFirstChange(e) {
-        // console.log("value: ", e.target.value);
+        console.log("value: ", e.target.value);
         this.setState({
             first: e.target.value,
         });
@@ -38,7 +38,8 @@ export default class Registration extends React.Component {
         });
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
+        console.log(this);
         console.log("value: ", event.target.value);
         // const target = event.target;
         const name = event.target.name;
@@ -46,7 +47,7 @@ export default class Registration extends React.Component {
         this.setState({
             [name]: value,
         });
-    }
+    };
 
     handleSubmit(e) {
         e.preventDefault();

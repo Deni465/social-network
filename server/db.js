@@ -43,3 +43,19 @@ module.exports.createUser = function (first, last, email, password) {
                 .catch((error) => console.log("error inserting user", error));
         });
 };
+
+module.exports.getUserById = function (id) {
+    const sql = `SELECT * FROM users WHERE id = $1;`;
+    return db
+        .query(sql, [id])
+        .then((result) => result.rows)
+        .catch((error) => console.log("error getting user by id", error));
+};
+
+module.exports.updateProfilePicture = function (id, img_url) {
+    const sql = `UPDATE users SET img_url = $2 WHERE id = $1;`;
+    return db
+        .query(sql, [id, img_url])
+        .then((result) => result.rows)
+        .catch((error) => console.log("error updating img_url", error));
+};

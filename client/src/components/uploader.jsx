@@ -1,4 +1,6 @@
-export default function Uploader({ setProfilePic }) {
+import "./uploader.css";
+
+export default function Uploader({ setProfilePic, togglePopup }) {
     const onFormSubmit = (e) => {
         // const form =
         // // data of fetch:
@@ -15,8 +17,18 @@ export default function Uploader({ setProfilePic }) {
     };
 
     return (
-        <>
-            <form action="?" method="?" onSubmit={onFormSubmit}></form>
-        </>
+        <div className="overlay">
+            <div className="popup">
+                <h4 onClick={togglePopup}>X</h4>
+                <form
+                    action="/user/id.json"
+                    method="POST"
+                    onSubmit={onFormSubmit}
+                >
+                    <input type="file" />
+                    <input type="submit" value="UPLOAD" />
+                </form>
+            </div>
+        </div>
     );
 }
