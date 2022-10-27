@@ -1,7 +1,8 @@
 import { Component } from "react";
-import Logo from "./logo.jsx";
-import Profile from "./profile.jsx";
+import Logo from "./Logo.jsx";
+import ProfileImg from "./ProfileImg.jsx";
 import Uploader from "./uploader.jsx";
+import Profile from "./Profile.jsx";
 
 export default class App extends Component {
     constructor() {
@@ -15,6 +16,7 @@ export default class App extends Component {
                 bio: "",
             },
             isPopupOpen: false,
+            
         };
 
         this.togglePopup = this.togglePopup.bind(this);
@@ -24,7 +26,7 @@ export default class App extends Component {
         console.log("componentDidMount()");
         // fetch user info from server
         // add it to the state
-        fetch("/user/id.json")
+        fetch("/user")
             .then((res) => {
                 return res.json();
             })
@@ -57,7 +59,7 @@ export default class App extends Component {
             <>
                 <div className="navbar">
                     <Logo />
-                    <Profile
+                    <ProfileImg
                         first={this.state.user.first}
                         last={this.state.user.last}
                         togglePopup={this.togglePopup}
@@ -70,6 +72,10 @@ export default class App extends Component {
                     )}
                 </div>
                 <hr />
+                <Profile
+                    first={this.state.user.first}
+                    last={this.state.user.last}
+                />
             </>
         );
     }

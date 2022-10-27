@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import React from "react";
-import Registration from "./registration.jsx";
-import Logo from "./logo.jsx";
-import Login from "./login.jsx";
+import Registration from "./Registration.jsx";
+import Logo from "./Logo.jsx";
+import Login from "./Login.jsx";
 
 export default class Welcome extends React.Component {
     render() {

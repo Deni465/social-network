@@ -63,13 +63,30 @@ app.post("/login", (req, res) => {
         });
 });
 
+// app.post("/profile-img", (req, res) => {});
+
+// app.post("/bio", (req, res) => {});
+
+app.get("/user", (req, res) => {
+    db.getUserById(req.session.userId)
+        .then((data) => {
+            delete data[0].password;
+            res.json(data[0]);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 app.get("/user/id.json", (req, res) => {
     console.log("userId", req.session.userId);
     if (req.session.userId) {
-        // db.getUserById().then((data) => {
-        //     console.log(data);
-        //     res.json(data);
-        // });
+        // db.getUserById(id).then((data)=>{
+        //     res.json({
+        //         success: true,
+        //         message: "Login successfull",
+        //     });
+        // })
         return res.json({ userId: req.session.userId });
     }
 });

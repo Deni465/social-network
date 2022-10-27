@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
-import Welcome from "./components/welcome.jsx";
+import Welcome from "./components/Welcome.jsx";
 // import Logo from "./components/logo.jsx";
-import App from "./components/app.jsx";
+import App from "./components/App.jsx";
 
 ReactDOM.render(<Welcome />, document.querySelector("main"));
 
