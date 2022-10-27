@@ -8,8 +8,11 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <>
-                <h1>Welcome To The Olive-Club</h1>
-                <p>Everyone Who Loves Olives Is Welcome Here!</p>
+                <h1>Welcome To The Grinch-Club</h1>
+                <p>
+                    Everyone Who Loves Christmas As Much As The Grinch Or Even
+                    The Grinch Or Just The Color Green Is Welcome Here!
+                </p>
                 <Logo />
                 <BrowserRouter>
                     <Route exact path="/">

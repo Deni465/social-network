@@ -1,3 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.grinch {
+    width: 300px;
+}
+
 .myProfile {
     display: flex;
     flex-direction: column;
@@ -17,7 +28,7 @@ div {
 }
 
 form {
-    width: 60%;
+    width: 30%;
 }
 
 .navbar {
@@ -42,4 +53,3 @@ p {
     object-fit: scale-down;
     width: 60px;
 }
-

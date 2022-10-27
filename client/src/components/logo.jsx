@@ -4,8 +4,8 @@ export default class Logo extends React.Component {
     render() {
         return (
             <>
-                <img
-                    src="https://i.pinimg.com/564x/71/d5/23/71d52372f850b616abfedcd7515f802c.jpg"
+                <img className="grinch"
+                    src="https://cdn-icons-png.flaticon.com/512/1224/1224423.png"
                     alt="olives"
                 />
             </>
