@@ -16,10 +16,10 @@ export default class App extends Component {
                 bio: "",
             },
             isPopupOpen: false,
-            
         };
 
         this.togglePopup = this.togglePopup.bind(this);
+        this.setProfilePic = this.setProfilePic.bind(this);
     }
 
     componentDidMount() {
@@ -48,10 +48,13 @@ export default class App extends Component {
     }
 
     setProfilePic(url) {
-        console.log(url);
-        // update the state with new profile pic url!
-        // close the popup!
+        // console.log("newUrl", url);
         this.togglePopup();
+        this.setState({ user: { ...this.state.user, img_url: url } });
+    }
+
+    setBio(newBio) {
+        this.setState({ user: { ...this.state.user, bio: newBio } });
     }
 
     render() {
@@ -62,6 +65,7 @@ export default class App extends Component {
                     <ProfileImg
                         first={this.state.user.first}
                         last={this.state.user.last}
+                        img_url={this.state.user.img_url}
                         togglePopup={this.togglePopup}
                     />
                     {this.state.isPopupOpen && (
@@ -75,6 +79,13 @@ export default class App extends Component {
                 <Profile
                     first={this.state.user.first}
                     last={this.state.user.last}
+                    img_url={this.state.user.img_url}
+                    bio={this.state.user.bio}
+                    setProfilePic={this.setProfilePic}
+                    togglePopup={this.togglePopup}
+                    setBio={(updatedBio) => {
+                        this.setBio(updatedBio);
+                    }}
                 />
             </>
         );

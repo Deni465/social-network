@@ -53,9 +53,17 @@ module.exports.getUserById = function (id) {
 };
 
 module.exports.updateProfilePicture = function (id, img_url) {
-    const sql = `UPDATE users SET img_url = $2 WHERE id = $1;`;
+    const sql = `UPDATE users SET img_url = $2 WHERE id = $1 RETURNING id, img_url;`;
     return db
         .query(sql, [id, img_url])
         .then((result) => result.rows)
         .catch((error) => console.log("error updating img_url", error));
+};
+
+module.exports.insertBio = function (id, bio) {
+    const sql = `UPDATE users SET bio = $2 WHERE id = $1;`;
+    return db
+        .query(sql, [id, bio])
+        .then((result) => result.rows)
+        .catch((error) => console.log("error updating bio", error));
 };

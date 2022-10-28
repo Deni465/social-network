@@ -5,6 +5,21 @@ const path = require("path");
 const cookieSession = require("cookie-session");
 require("dotenv").config();
 const db = require("./db");
+const { uploader } = require("./middleware.js");
+const aws = require("aws-sdk");
+const fs = require("fs");
+
+let secrets;
+if (process.env.NODE_ENV == "production") {
+    secrets = process.env; // in prod the secrets are environment variables
+} else {
+    secrets = require("../secrets.json"); // in dev they are in secrets.json which is listed in .gitignore
+}
+
+const s3 = new aws.S3({
+    accessKeyId: secrets.AWS_KEY,
+    secretAccessKey: secrets.AWS_SECRET,
+});
 
 app.use(compression());
 
@@ -63,9 +78,57 @@ app.post("/login", (req, res) => {
         });
 });
 
-// app.post("/profile-img", (req, res) => {});
+app.post("/profileimg", uploader.single("file"), (req, res) => {
+    if (req.file) {
+        console.log("success");
+        const { filename, mimetype, size, path } = req.file;
+        const promise = s3
+            .putObject({
+                Bucket: "spicedling",
+                ACL: "public-read",
+                Key: filename,
+                Body: fs.createReadStream(path),
+                ContentType: mimetype,
+                ContentLength: size,
+            })
+            .promise();
 
-// app.post("/bio", (req, res) => {});
+        let url = `https://s3.amazonaws.com/spicedling/${filename}`;
+        promise
+            .then(() => {
+                console.log("success");
+                // console.log("req.file", req.file);
+                return db.updateProfilePicture(req.session.userId, url);
+            })
+            .then((data) => {
+                console.log("we send to the client data", data);
+
+                res.json({
+                    success: true,
+                    message: "Thank you!",
+                    id: data[0].id,
+                    created_at: data[0].created_at,
+                    url,
+                });
+                // console.log("url", url);
+                fs.unlinkSync(path, () => {});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    } else {
+        res.json({
+            success: false,
+            message: "You didn't pick a file!",
+        });
+    }
+});
+
+app.post("/bio", (req, res) => {
+    db.insertBio(req.session.userId, req.body.bio).then((data) => {
+        console.log("Bio successful", data);
+    });
+});
 
 app.get("/user", (req, res) => {
     db.getUserById(req.session.userId)

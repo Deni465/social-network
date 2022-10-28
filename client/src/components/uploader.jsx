@@ -1,20 +1,33 @@
 import "./uploader.css";
+import { useState } from "react";
 
 export default function Uploader({ setProfilePic, togglePopup }) {
+    const [filename, setFilename] = useState();
+
     const onFormSubmit = (e) => {
-        // const form =
-        // // data of fetch:
-        // const data = new FormData(form);
-        fetch(e)
+        e.preventDefault();
+        // console.log(e);
+
+        const data = new FormData();
+        data.append("file", filename);
+
+        // console.log(filename);
+        fetch("/profileimg", {
+            method: "POST",
+            body: data,
+            // headers: { "Content-Type": "application/json" },
+        })
             .then((response) => response.json())
             .then((data) => {
-                // validate: check if the upload worked!
-                // if it did...
-                const newUrl = data.url;
-                setProfilePic(newUrl);
+                console.log("data", data);
+                setProfilePic(data.url);
                 // the function call above will ALSO cause the uploader to be hidden.
             });
     };
+
+    function onChange(e) {
+        setFilename(e.target.files[0]);
+    }
 
     return (
         <div className="overlay">
@@ -25,8 +38,8 @@ export default function Uploader({ setProfilePic, togglePopup }) {
                     method="POST"
                     onSubmit={onFormSubmit}
                 >
-                    <input type="file" />
-                    <input type="submit" value="UPLOAD" />
+                    <input name="file" type="file" onChange={onChange} />
+                    <input name="submit" type="submit" value="UPLOAD" />
                 </form>
             </div>
         </div>
