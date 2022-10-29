@@ -21,7 +21,7 @@ export default class Profile extends Component {
     }
 
     toggleTextarea() {
-        console.log("toggleTextarea");
+        // console.log("toggleTextarea");
         this.setState({
             // set it to the opposite of its current value!
             textareaIsOpen: !this.state.textareaIsOpen,
@@ -53,7 +53,7 @@ export default class Profile extends Component {
                         <div>
                             <p>{this.props.bio}</p>{" "}
                             <button type="submit" onClick={this.toggleTextarea}>
-                                {this.state.bio ? "Edit Bio" : "Add Bio"}
+                                {this.props.bio ? "Edit Bio" : "Add Bio"}
                             </button>
                         </div>
                     )}

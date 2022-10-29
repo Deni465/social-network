@@ -8,11 +8,11 @@ ReactDOM.render(<Welcome />, document.querySelector("main"));
 fetch("/user/id.json")
     .then((response) => response.json())
     .then((data) => {
-        console.log("data", data);
+        // console.log("data", data);
         if (!data.userId) {
             ReactDOM.render(<Welcome />, document.querySelector("main"));
         } else {
-            console.log("render app");
+            // console.log("render app");
             ReactDOM.render(<App />, document.querySelector("main"));
         }
     });

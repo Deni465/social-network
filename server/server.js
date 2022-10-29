@@ -22,11 +22,8 @@ const s3 = new aws.S3({
 });
 
 app.use(compression());
-
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
-
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
@@ -153,6 +150,10 @@ app.get("/user/id.json", (req, res) => {
         return res.json({ userId: req.session.userId });
     }
 });
+
+app.get("/newusers", (req, res) => {});
+
+app.get("/findusers", (req, res) => {});
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));

@@ -3,6 +3,8 @@ import Logo from "./Logo.jsx";
 import ProfileImg from "./ProfileImg.jsx";
 import Uploader from "./uploader.jsx";
 import Profile from "./Profile.jsx";
+import FindUser from "./findUser.jsx";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends Component {
     constructor() {
@@ -23,7 +25,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount()");
+        // console.log("componentDidMount()");
         // fetch user info from server
         // add it to the state
         fetch("/user")
@@ -76,17 +78,26 @@ export default class App extends Component {
                     )}
                 </div>
                 <hr />
-                <Profile
-                    first={this.state.user.first}
-                    last={this.state.user.last}
-                    img_url={this.state.user.img_url}
-                    bio={this.state.user.bio}
-                    setProfilePic={this.setProfilePic}
-                    togglePopup={this.togglePopup}
-                    setBio={(updatedBio) => {
-                        this.setBio(updatedBio);
-                    }}
-                />
+                <BrowserRouter>
+                    <Route exact path="/">
+                        <Profile
+                            first={this.state.user.first}
+                            last={this.state.user.last}
+                            img_url={this.state.user.img_url}
+                            bio={this.state.user.bio}
+                            setProfilePic={this.setProfilePic}
+                            togglePopup={this.togglePopup}
+                            setBio={(updatedBio) => {
+                                this.setBio(updatedBio);
+                            }}
+                        />
+                        <Link to="/newusers">🔍 Find Other Users</Link>
+                    </Route>
+                    <Route path="/newusers">
+                        <FindUser />
+                        <Link to="/">Back To Profile</Link>
+                    </Route>
+                </BrowserRouter>
             </>
         );
     }
