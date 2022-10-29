@@ -4,20 +4,20 @@ import { useState } from "react";
 export default function FindUser() {
     const [findFriend, setFindFriend] = useState("");
 
-    const users = {
-        name: "Bob",
-    };
+    // const users = {
+    //     name: "Bob",
+    // };
 
-    const getUsers = (searchString = "") => {
-        if (searchString === "") {
-            return users;
-        }
-        return users.filter((user) => {
-            return user.name
-                .toLocaleLowerCase()
-                .startsWith(searchString.toLocaleLowerCase());
-        });
-    };
+    // const getUsers = (searchString = "") => {
+    //     if (searchString === "") {
+    //         return users;
+    //     }
+    //     return users.filter((user) => {
+    //         return user.name
+    //             .toLocaleLowerCase()
+    //             .startsWith(searchString.toLocaleLowerCase());
+    //     });
+    // };
 
     return (
         <>

@@ -39,7 +39,7 @@ module.exports.createUser = function (first, last, email, password) {
             // Here we are using SAFE interpolation to protect against SQL injection attacks
             return db
                 .query(sql, [first, last, email, hashedPassword])
-                .then((result) => result.rows)
+                .then((result) => result.rows[0])
                 .catch((error) => console.log("error inserting user", error));
         });
 };
@@ -66,4 +66,14 @@ module.exports.insertBio = function (id, bio) {
         .query(sql, [id, bio])
         .then((result) => result.rows)
         .catch((error) => console.log("error updating bio", error));
+};
+
+module.exports.showLatestUsers = () => {
+    const sql = `SELECT * FROM images
+    ORDER BY id DESC
+    LIMIT 3;`;
+    return db
+        .query(sql)
+        .then((result) => result.rows)
+        .catch((error) => console.log("error in getting other users", error));
 };

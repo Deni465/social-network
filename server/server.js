@@ -39,8 +39,9 @@ app.post("/register", (req, res) => {
     const { first, last, email, password } = req.body;
     // console.log("req.body", req.body);
     db.createUser(first, last, email, password)
-        .then((id) => {
-            req.session.userId = id;
+        .then((newUser) => {
+            console.log({ newUser });
+            req.session.userId = newUser.id;
             res.json({
                 success: true,
                 message: "Registration successfull",
@@ -93,7 +94,7 @@ app.post("/profileimg", uploader.single("file"), (req, res) => {
         let url = `https://s3.amazonaws.com/spicedling/${filename}`;
         promise
             .then(() => {
-                console.log("success");
+                console.log("success", req.session.userId);
                 // console.log("req.file", req.file);
                 return db.updateProfilePicture(req.session.userId, url);
             })
@@ -151,7 +152,12 @@ app.get("/user/id.json", (req, res) => {
     }
 });
 
-app.get("/newusers", (req, res) => {});
+app.get("/showlatestusers", (req, res) => {
+    db.showLatestUsers().then((data) => {
+        console.log("Users shown", data);
+        res.json(data);
+    });
+});
 
 app.get("/findusers", (req, res) => {});
 

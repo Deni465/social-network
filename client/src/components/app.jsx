@@ -33,6 +33,7 @@ export default class App extends Component {
                 return res.json();
             })
             .then((data) => {
+                // console.log("data", data);
                 this.setState({ user: data });
                 console.log("this.state.user :", this.state.user);
             })
@@ -50,7 +51,7 @@ export default class App extends Component {
     }
 
     setProfilePic(url) {
-        // console.log("newUrl", url);
+        console.log("newUrl", url);
         this.togglePopup();
         this.setState({ user: { ...this.state.user, img_url: url } });
     }
@@ -91,9 +92,9 @@ export default class App extends Component {
                                 this.setBio(updatedBio);
                             }}
                         />
-                        <Link to="/newusers">🔍 Find Other Users</Link>
+                        <Link to="/showlatestusers">🔍 Find Other Users</Link>
                     </Route>
-                    <Route path="/newusers">
+                    <Route path="/showlatestusers">
                         <FindUser />
                         <Link to="/">Back To Profile</Link>
                     </Route>
