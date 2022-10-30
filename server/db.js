@@ -69,7 +69,7 @@ module.exports.insertBio = function (id, bio) {
 };
 
 module.exports.showLatestUsers = () => {
-    const sql = `SELECT * FROM images
+    const sql = `SELECT * FROM users
     ORDER BY id DESC
     LIMIT 3;`;
     return db

@@ -10,6 +10,7 @@ export default function Uploader({ setProfilePic, togglePopup }) {
 
         const data = new FormData();
         data.append("file", filename);
+        console.log("formData", data);
 
         // console.log(filename);
         fetch("/profileimg", {
@@ -26,6 +27,7 @@ export default function Uploader({ setProfilePic, togglePopup }) {
     };
 
     function onChange(e) {
+        console.log("e", e);
         setFilename(e.target.files[0]);
     }
 

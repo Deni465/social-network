@@ -9,12 +9,15 @@ export default class ProfileImg extends Component {
     }
 
     render() {
+        const defaultImg =
+            "https://i.pinimg.com/564x/78/d2/68/78d26806df761d91c412103b1c816b9a.jpg";
+
         return (
             <>
                 <button className="nav-img" onClick={this.props.togglePopup}>
                     <img
                         className="profile"
-                        src={this.props.img_url}
+                        src={this.props.img_url || defaultImg}
                         // src={userName}
                         alt="img"
                     />

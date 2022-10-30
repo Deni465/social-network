@@ -1,5 +1,5 @@
 import FindPeopleResultList from "./FindPeopleResultList.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function FindUser() {
     const [findFriend, setFindFriend] = useState("");

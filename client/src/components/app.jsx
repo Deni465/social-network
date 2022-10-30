@@ -4,6 +4,7 @@ import ProfileImg from "./ProfileImg.jsx";
 import Uploader from "./uploader.jsx";
 import Profile from "./Profile.jsx";
 import FindUser from "./findUser.jsx";
+import Logout from "./Logout.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends Component {
@@ -71,6 +72,7 @@ export default class App extends Component {
                         img_url={this.state.user.img_url}
                         togglePopup={this.togglePopup}
                     />
+                    <Logout />
                     {this.state.isPopupOpen && (
                         <Uploader
                             setProfilePic={this.setProfilePic}

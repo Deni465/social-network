@@ -59,7 +59,7 @@ export default class Login extends React.Component {
             <>
                 <h2>{"Login"}</h2>
                 <div>
-                    <form action="POST" onSubmit={this.handleSubmit}>
+                    <form method="POST" onSubmit={this.handleSubmit}>
                         <div id="secondform">
                             <label htmlFor="email">Email</label>
                             <input

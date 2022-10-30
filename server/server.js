@@ -76,6 +76,13 @@ app.post("/login", (req, res) => {
         });
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.json({
+        success: true,
+    });
+});
+
 app.post("/profileimg", uploader.single("file"), (req, res) => {
     if (req.file) {
         console.log("success");
