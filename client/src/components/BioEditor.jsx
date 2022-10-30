@@ -12,7 +12,7 @@ export default class BioEditor extends Component {
     }
 
     componentDidMount() {
-        this.setState({ newBio: this.props.bio });
+        this.setState({ newBio: this.props.bio || "" });
     }
 
     onChange(e) {

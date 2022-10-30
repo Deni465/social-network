@@ -36,6 +36,7 @@ export default class Profile extends Component {
                     last={this.props.last}
                     img_url={this.props.img_url}
                     togglePopup={this.props.togglePopup}
+                    mode="medium"
                 />
                 <div className="myProfile">
                     <p>

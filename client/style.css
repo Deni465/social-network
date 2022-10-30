@@ -48,8 +48,3 @@ button {
 p {
     margin: 10px;
 }
-
-.nav-img img {
-    object-fit: scale-down;
-    width: 60px;
-}

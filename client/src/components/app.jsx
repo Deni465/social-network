@@ -71,6 +71,7 @@ export default class App extends Component {
                         last={this.state.user.last}
                         img_url={this.state.user.img_url}
                         togglePopup={this.togglePopup}
+                        mode="small"
                     />
                     <Logout />
                     {this.state.isPopupOpen && (

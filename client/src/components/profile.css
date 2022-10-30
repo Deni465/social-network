@@ -4,8 +4,13 @@ body {
     padding: 0;
 }
 
-.nav-img img {
+.nav-img-medium {
     width: 150px;
+}
+
+.nav-img-small {
+    object-fit: scale-down;
+    width: 60px;
 }
 
 .grinch {

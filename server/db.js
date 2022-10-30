@@ -75,5 +75,13 @@ module.exports.showLatestUsers = () => {
     return db
         .query(sql)
         .then((result) => result.rows)
-        .catch((error) => console.log("error in getting other users", error));
+        .catch((error) => console.log("error in getting latest users", error));
+};
+
+module.exports.getMatchingUsers = (first) => {
+    const sql = `SELECT * FROM users WHERE first ILIKE $1;`;
+    return db
+        .query(sql, [first + "%"])
+        .then((result) => result.rows)
+        .catch((error) => console.log("error in finding other users", error));
 };

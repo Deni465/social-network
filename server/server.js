@@ -160,13 +160,18 @@ app.get("/user/id.json", (req, res) => {
 });
 
 app.get("/showlatestusers", (req, res) => {
-    db.showLatestUsers().then((data) => {
-        console.log("Users shown", data);
-        res.json(data);
-    });
+    console.log(req.query);
+    if (req.query.query === "") {
+        db.showLatestUsers().then((data) => {
+            console.log("Users shown", data);
+            res.json(data);
+        });
+    } else {
+        db.getMatchingUsers(req.query.query).then((data) => {
+            res.json(data);
+        });
+    }
 });
-
-app.get("/findusers", (req, res) => {});
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
