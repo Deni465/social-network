@@ -1,4 +1,4 @@
-const FindPeopleResultList = ({ users }) => {
+export default function FindPeopleResultList({ users }) {
     console.log(users);
     return (
         <ul>
@@ -8,11 +8,8 @@ const FindPeopleResultList = ({ users }) => {
                     <p>
                         {user.first} {user.last}
                     </p>
-                    <p>{user.bio}</p>
                 </li>
             ))}
         </ul>
     );
-};
-
-export default FindPeopleResultList;
+}

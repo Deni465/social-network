@@ -159,7 +159,7 @@ app.get("/user/id.json", (req, res) => {
     }
 });
 
-app.get("/showlatestusers", (req, res) => {
+app.get("/getlatestusers", (req, res) => {
     console.log(req.query);
     if (req.query.query === "") {
         db.showLatestUsers().then((data) => {

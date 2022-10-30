@@ -1,14 +1,14 @@
-import FindPeopleResultList from "./FindPeopleResultList.jsx";
+import FindUserResultList from "./FindUserResultList.jsx";
 import { useState, useEffect } from "react";
 
 export default function FindUser() {
-    const [findFriend, setFindFriend] = useState("");
+    const [userQuery, setUserQuery] = useState("");
     const [foundUserList, setFoundUserList] = useState([]);
 
     useEffect(() => {
         // setFoundUserList([{ name: "Bob" }]);
-        console.log("findFriend", findFriend);
-        fetch(`/showlatestusers/?query=${findFriend}`, {
+        console.log("userQuery", userQuery);
+        fetch(`/getlatestusers/?query=${userQuery}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
@@ -16,19 +16,19 @@ export default function FindUser() {
             .then((data) => {
                 setFoundUserList(data);
             });
-    }, [findFriend]);
+    }, [userQuery]);
 
     return (
         <>
             <h1>Find People</h1>
-            <p>{findFriend}</p>
+            <p>{userQuery}</p>
             <input
                 type="text"
                 onChange={(e) => {
-                    setFindFriend(e.target.value);
+                    setUserQuery(e.target.value);
                 }}
             ></input>
-            <FindPeopleResultList users={foundUserList} />
+            <FindUserResultList users={foundUserList} />
         </>
     );
 }
