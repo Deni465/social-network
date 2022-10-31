@@ -8,7 +8,7 @@ const Logout = () => {
         })
             .then((res) => res.json())
             .then(() => {
-                location.reload();
+                location.replace("/");
             });
     };
 

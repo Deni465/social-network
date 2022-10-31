@@ -8,6 +8,8 @@ CREATE TABLE users(
     password VARCHAR(60) NOT NULL CHECK(password != ''),
     img_url VARCHAR,
     bio TEXT,
+    code VARCHAR(255),
+    code_created_at TIMESTAMP, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

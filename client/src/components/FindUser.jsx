@@ -6,8 +6,7 @@ export default function FindUser() {
     const [foundUserList, setFoundUserList] = useState([]);
 
     useEffect(() => {
-        // setFoundUserList([{ name: "Bob" }]);
-        console.log("userQuery", userQuery);
+        // console.log("userQuery", userQuery);
         fetch(`/getlatestusers/?query=${userQuery}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -21,7 +20,7 @@ export default function FindUser() {
     return (
         <>
             <h1>Find People</h1>
-            <p>{userQuery}</p>
+            {/* <p>{userQuery}</p> */}
             <input
                 type="text"
                 onChange={(e) => {

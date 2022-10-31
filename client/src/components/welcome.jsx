@@ -3,6 +3,7 @@ import React from "react";
 import Registration from "./Registration.jsx";
 import Logo from "./Logo.jsx";
 import Login from "./Login.jsx";
+import ResetPassword from "./ResetPassword.jsx";
 
 export default class Welcome extends React.Component {
     render() {
@@ -22,6 +23,10 @@ export default class Welcome extends React.Component {
                     <Route path="/login">
                         <Login />
                         <Link to="/">Click here to register!</Link>
+                        <Link to="/resetpassword">Forgot My Password</Link>
+                    </Route>
+                    <Route path="/resetpassword">
+                        <ResetPassword />
                     </Route>
                 </BrowserRouter>
             </>

@@ -4,6 +4,7 @@ const db_url = process.env.DATABASE_URL;
 const bcrypt = require("bcryptjs");
 console.log(db_url);
 const db = spicedPg(db_url);
+const cryptoRandomString = require("crypto-random-string");
 
 module.exports.getUserByEmail = function (email) {
     const sql = "SELECT * FROM users WHERE email = $1";
@@ -85,3 +86,70 @@ module.exports.getMatchingUsers = (first) => {
         .then((result) => result.rows)
         .catch((error) => console.log("error in finding other users", error));
 };
+
+module.exports.updatePassword = (email, password, code) => {
+    return checkCode(email, code).then((result) => {
+        if (result.length == 1) {
+            return bcrypt
+                .genSalt()
+                .then((salt) => {
+                    return bcrypt.hash(password, salt);
+                })
+                .then((hashedPassword) => {
+                    const sql = `UPDATE users SET password = $2 WHERE email = $1 AND code = $3;`;
+                    return db
+                        .query(sql, [email, hashedPassword, code])
+                        .then((result) => {
+                            return {
+                                success: true,
+                            };
+                        })
+                        .catch((error) =>
+                            console.log("error updating password", error)
+                        );
+                });
+        } else {
+            return { success: false };
+        }
+    });
+
+    // {
+    //     // return bcrypt
+    //     //     .genSalt()
+    //     //     .then((salt) => {
+    //     //         return bcrypt.hash(password, salt);
+    //     //     })
+    //     //     .then((hashedPassword) => {
+    //     //         const sql = `UPDATE users SET password = $2 WHERE email = $1 AND code = $3;`;
+    //     //         return db
+    //     //             .query(sql, [email, hashedPassword, code])
+    //     //             .then((result) => result.rows)
+    //     //             .catch((error) =>
+    //     //                 console.log("error updating password", error)
+    //     //             );
+    //     //     });
+    // } else {
+    //     return "Update Password Failed!";
+    // }
+};
+
+module.exports.generateCode = (email) => {
+    const secretCode = cryptoRandomString({
+        length: 6,
+    });
+    const sql = `UPDATE users SET code = $2, code_created_at = CURRENT_TIMESTAMP WHERE email = $1 RETURNING id, email,code;`;
+    return db
+        .query(sql, [email, secretCode])
+        .then((result) => {
+            return result.rows;
+        })
+        .catch((error) => console.log("error updating bio", error));
+};
+
+function checkCode(email, code) {
+    const sql = `SELECT id FROM users WHERE email = $1 AND code = $2 AND CURRENT_TIMESTAMP - code_created_at < INTERVAL '1 minute';`;
+    return db
+        .query(sql, [email, code])
+        .then((result) => result.rows)
+        .catch((error) => console.log("error updating bio", error));
+}

@@ -5,6 +5,7 @@ import Uploader from "./uploader.jsx";
 import Profile from "./Profile.jsx";
 import FindUser from "./findUser.jsx";
 import Logout from "./Logout.jsx";
+import OtherProfiles from "./OtherProfiles.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends Component {
@@ -12,6 +13,7 @@ export default class App extends Component {
         super();
         this.state = {
             user: {
+                id: "",
                 first: "",
                 last: "",
                 email: "",
@@ -36,7 +38,7 @@ export default class App extends Component {
             .then((data) => {
                 // console.log("data", data);
                 this.setState({ user: data });
-                console.log("this.state.user :", this.state.user);
+                // console.log("this.state.user :", this.state.user);
             })
             .catch((error) => {
                 console.log(error);
@@ -44,7 +46,7 @@ export default class App extends Component {
     }
 
     togglePopup() {
-        console.log("togglePopup");
+        // console.log("togglePopup");
         this.setState({
             // set it to the opposite of its current value!
             isPopupOpen: !this.state.isPopupOpen,
@@ -52,7 +54,7 @@ export default class App extends Component {
     }
 
     setProfilePic(url) {
-        console.log("newUrl", url);
+        // console.log("newUrl", url);
         this.togglePopup();
         this.setState({ user: { ...this.state.user, img_url: url } });
     }
@@ -100,6 +102,17 @@ export default class App extends Component {
                     <Route path="/showlatestusers">
                         <FindUser />
                         <Link to="/">Back To Profile</Link>
+                    </Route>
+
+                    <Route path="/showlatestuser/:id">
+                        <OtherProfiles
+                            isSessionUser={(id) => {
+                                if (id == this.state.user.id) {
+                                    location.replace("/");
+                                }
+                            }}
+                        />
+                        <Link to="/showlatestusers">Back To Search</Link>
                     </Route>
                 </BrowserRouter>
             </>

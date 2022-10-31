@@ -106,7 +106,8 @@ app.post("/profileimg", uploader.single("file"), (req, res) => {
                 return db.updateProfilePicture(req.session.userId, url);
             })
             .then((data) => {
-                console.log("we send to the client data", data);
+                console.log("path", path);
+                fs.unlinkSync(path, () => {});
 
                 res.json({
                     success: true,
@@ -116,7 +117,6 @@ app.post("/profileimg", uploader.single("file"), (req, res) => {
                     url,
                 });
                 // console.log("url", url);
-                fs.unlinkSync(path, () => {});
             })
             .catch((err) => {
                 console.log(err);
@@ -132,6 +132,7 @@ app.post("/profileimg", uploader.single("file"), (req, res) => {
 app.post("/bio", (req, res) => {
     db.insertBio(req.session.userId, req.body.bio).then((data) => {
         console.log("Bio successful", data);
+        res.json(data);
     });
 });
 
@@ -146,24 +147,31 @@ app.get("/user", (req, res) => {
         });
 });
 
+app.get("/getlatestuser/:id", (req, res) => {
+    // console.log("req.params.id", req.params.id);
+    db.getUserById(req.params.id)
+        .then((data) => {
+            delete data[0].password;
+            console.log("data", data);
+            res.json(data[0]);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 app.get("/user/id.json", (req, res) => {
     console.log("userId", req.session.userId);
     if (req.session.userId) {
-        // db.getUserById(id).then((data)=>{
-        //     res.json({
-        //         success: true,
-        //         message: "Login successfull",
-        //     });
-        // })
         return res.json({ userId: req.session.userId });
     }
 });
 
 app.get("/getlatestusers", (req, res) => {
-    console.log(req.query);
+    // console.log("req.query", req.query);
     if (req.query.query === "") {
         db.showLatestUsers().then((data) => {
-            console.log("Users shown", data);
+            // console.log("Users shown", data);
             res.json(data);
         });
     } else {
@@ -171,6 +179,21 @@ app.get("/getlatestusers", (req, res) => {
             res.json(data);
         });
     }
+});
+
+app.post("/getcode", (req, res) => {
+    db.generateCode(req.body.email).then((data) => {
+        res.json(data);
+    });
+});
+
+app.post("/reset", (req, res) => {
+    db.updatePassword(req.body.email, req.body.password, req.body.code).then(
+        (data) => {
+            console.log("data", data);
+            res.json(data);
+        }
+    );
 });
 
 app.get("*", function (req, res) {
