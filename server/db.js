@@ -161,11 +161,8 @@ module.exports.getFriendshipInformation = (user1, user2) => {
 };
 
 module.exports.createFriendship = (user1, user2) => {
-    // db create friendship
-    // insert into friendships
-    // sender and recipient
-    // status pending (false)
-    const sql = `INSERT INTO friendships VALUES $1, $2 RETURNING *;`;
+    const sql = `INSERT INTO friendships (sender_id, recipient_id)
+    VALUES ($1, $2) RETURNING *;`;
     return db
         .query(sql, [user1, user2])
         .then((result) => result.rows)
@@ -173,13 +170,9 @@ module.exports.createFriendship = (user1, user2) => {
 };
 
 module.exports.acceptFriendship = (user1, user2) => {
-    // db accept friendship
-    // update friendship
-    // set status = true where recipient = $2
-    // server (recipient = req.session.id)
     const sql = `UPDATE friendships SET accepted = true 
-    WHERE (sender_id = $1 AND receiver_id = $2 AND accepted = false)
-    OR (sender_id = $2 AND receiver_id = $1 AND accepted = false)
+    WHERE (sender_id = $1 AND recipient_id = $2 AND accepted = false)
+    OR (sender_id = $2 AND recipient_id = $1 AND accepted = false)
     RETURNING accepted;`;
     return db
         .query(sql, [user1, user2])
@@ -190,17 +183,13 @@ module.exports.acceptFriendship = (user1, user2) => {
 };
 
 module.exports.cancelFriendship = (user1, user2) => {
-    // db cancel/unfriend/reject
-    // delete * from friendships
-    // where (sender = $1 AND recipient = $2)
-    // OR (sender = $2 AND recipient = $1)
     const sql = `DELETE FROM friendships 
     WHERE (sender_id = $1 AND recipient_id = $2)
-    OR (sender_id = $2 AND recipient_id = $1) RETURNING accepted;`;
+    OR (sender_id = $2 AND recipient_id = $1);`;
     return db
         .query(sql, [user1, user2])
         .then((result) => result.rows)
         .catch((error) =>
-            console.log("Error in acceptFriendshipRequest:", error)
+            console.log("Error in cancelFriendshipRequest:", error)
         );
 };

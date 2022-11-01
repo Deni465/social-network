@@ -13,6 +13,7 @@ export default function FindUser() {
         })
             .then((response) => response.json())
             .then((data) => {
+                // console.log("Hello find user");
                 setFoundUserList(data);
             });
     }, [userQuery]);

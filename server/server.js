@@ -34,6 +34,17 @@ app.use(
     })
 );
 
+app.use((req, res, next) => {
+    console.log("---------------------");
+    console.log("req.url:", req.url);
+    console.log("req.method:", req.method);
+    console.log("req.session:", req.session);
+    console.log("req.params:", req.params);
+    console.log("req.body:", req.body);
+    console.log("---------------------");
+    next();
+});
+
 ///////////////////// Routes /////////////////////
 
 app.post("/register", (req, res) => {
@@ -165,7 +176,7 @@ app.get("/getlatestuser/:id", (req, res) => {
     db.getUserById(req.params.id)
         .then((data) => {
             delete data[0].password;
-            console.log("data", data);
+            console.log("getUserById data", data);
             res.json(data[0]);
         })
         .catch((err) => {
@@ -198,7 +209,7 @@ app.post("/getcode", (req, res) => {
 app.post("/reset", (req, res) => {
     db.updatePassword(req.body.email, req.body.password, req.body.code).then(
         (data) => {
-            console.log("data", data);
+            console.log("updatePassword data", data);
             res.json(data);
         }
     );
@@ -206,16 +217,57 @@ app.post("/reset", (req, res) => {
 
 ///////////////////// Friendship Request /////////////////////
 
-app.get("/getfriendship", (req, res) => {
-    db.getFriendshipInformation().then((data) => {
+app.get("/getfriendship/:id", (req, res) => {
+    console.log("-----------------------------------------");
+    console.log("\t /getfriendship/:id ");
+    console.log("id: ", req.params.id, "\nuserId: ", req.session.userId);
+    console.log("-----------------------------------------");
+
+    db.getFriendshipInformation(req.session.userId, req.params.id).then(
+        (data) => {
+            console.log("getFriendshipInformation data:", data);
+            // initial value = no friendship => buttonStatus = request Friendship
+            // find in FriendshipButton buttonStatus arr
+            const friendshipResult = { friendshipStatus: 0 };
+            console.log("data.length", data.length);
+            if (data.length == 1) {
+                if (data[0].accepted == true) {
+                    // status friendship accepted => buttonStatus Unfriend
+                    friendshipResult.friendshipStatus = 1;
+                } else {
+                    console.log("hello");
+                    if (req.session.userId == data[0].sender_id) {
+                        friendshipResult.friendshipStatus = 3;
+                    } else if (req.session.userId == data[0].recipient_id) {
+                        friendshipResult.friendshipStatus = 2;
+                    }
+                }
+            }
+            res.json(friendshipResult);
+        }
+    );
+});
+
+app.post("/requestfriendship/:id", (req, res) => {
+    db.createFriendship(req.session.userId, req.params.id).then((data) => {
         console.log(data);
         res.json(data);
     });
 });
 
-app.post("/requestfriendship", (req,res)=>{
-    
-})
+app.post("/acceptfriendship/:id", (req, res) => {
+    db.acceptFriendship(req.session.userId, req.params.id).then((data) => {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+app.post("/cancelfriendship/:id", (req, res) => {
+    db.cancelFriendship(req.session.userId, req.params.id).then((data) => {
+        console.log(data);
+        res.json(data);
+    });
+});
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
