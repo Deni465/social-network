@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import Logo from "./Logo.jsx";
 import ProfileImg from "./ProfileImg.jsx";
 import Uploader from "./uploader.jsx";
@@ -6,117 +6,106 @@ import Profile from "./Profile.jsx";
 import FindUser from "./findUser.jsx";
 import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
-// import FirendshipButton from "./FriendshipButton.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-export default class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            user: {
-                id: "",
-                first: "",
-                last: "",
-                email: "",
-                img_url: "",
-                bio: "",
-            },
-            isPopupOpen: false,
-        };
+export default function App() {
+    const [state, setState] = useState({
+        user: {
+            id: "",
+            first: "",
+            last: "",
+            email: "",
+            img_url: "",
+            bio: "",
+        },
+        isPopupOpen: false,
+    });
 
-        this.togglePopup = this.togglePopup.bind(this);
-        this.setProfilePic = this.setProfilePic.bind(this);
-    }
-
-    componentDidMount() {
-        // console.log("componentDidMount()");
-        // fetch user info from server
-        // add it to the state
+    useEffect(() => {
         fetch("/user")
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
                 // console.log("data", data);
-                this.setState({ user: data });
+                setState({ ...state, user: data });
                 // console.log("this.state.user :", this.state.user);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }
+    }, []);
 
-    togglePopup() {
+    const togglePopup = () => {
         // console.log("togglePopup");
-        this.setState({
+        setState({
             // set it to the opposite of its current value!
-            isPopupOpen: !this.state.isPopupOpen,
+            ...state,
+            isPopupOpen: !state.isPopupOpen,
         });
-    }
+    };
 
-    setProfilePic(url) {
+    const setProfilePic = (url) => {
         // console.log("newUrl", url);
-        this.togglePopup();
-        this.setState({ user: { ...this.state.user, img_url: url } });
-    }
+        togglePopup();
+        setState({ ...state, user: { ...state.user, img_url: url } });
+    };
 
-    setBio(newBio) {
-        this.setState({ user: { ...this.state.user, bio: newBio } });
-    }
+    const setBio = (newBio) => {
+        setState({ ...state, user: { ...state.user, bio: newBio } });
+    };
 
-    render() {
-        return (
-            <>
-                <div className="navbar">
-                    <Logo />
-                    <ProfileImg
-                        first={this.state.user.first}
-                        last={this.state.user.last}
-                        img_url={this.state.user.img_url}
-                        togglePopup={this.togglePopup}
-                        mode="small"
+    return (
+        <>
+            <div className="navbar">
+                <Logo />
+                <ProfileImg
+                    first={state.user.first}
+                    last={state.user.last}
+                    img_url={state.user.img_url}
+                    togglePopup={togglePopup}
+                    mode="small"
+                />
+                <Logout />
+                {state.isPopupOpen && (
+                    <Uploader
+                        setProfilePic={setProfilePic}
+                        togglePopup={togglePopup}
                     />
-                    <Logout />
-                    {this.state.isPopupOpen && (
-                        <Uploader
-                            setProfilePic={this.setProfilePic}
-                            togglePopup={this.togglePopup}
-                        />
-                    )}
-                </div>
-                <hr />
-                <BrowserRouter>
-                    <Route exact path="/">
-                        <Profile
-                            first={this.state.user.first}
-                            last={this.state.user.last}
-                            img_url={this.state.user.img_url}
-                            bio={this.state.user.bio}
-                            setProfilePic={this.setProfilePic}
-                            togglePopup={this.togglePopup}
-                            setBio={(updatedBio) => {
-                                this.setBio(updatedBio);
-                            }}
-                        />
-                        <Link to="/showlatestusers">🔍 Find Other Users</Link>
-                    </Route>
-                    <Route path="/showlatestusers">
-                        <FindUser />
-                        <Link to="/">Back To Profile</Link>
-                    </Route>
+                )}
+            </div>
+            <hr />
+            <BrowserRouter>
+                <Route exact path="/">
+                    <Profile
+                        first={state.user.first}
+                        last={state.user.last}
+                        img_url={state.user.img_url}
+                        bio={state.user.bio}
+                        setProfilePic={setProfilePic}
+                        togglePopup={togglePopup}
+                        setBio={(updatedBio) => {
+                            setBio(updatedBio);
+                        }}
+                    />
+                    <Link to="/showlatestusers">🔍 Find Other Users</Link>
+                </Route>
+                <Route path="/showlatestusers">
+                    <FindUser />
+                    <Link to="/">Back To Profile</Link>
+                </Route>
 
-                    <Route path="/showlatestuser/:id">
-                        <OtherProfiles
-                            isSessionUser={(id) => {
-                                if (id == this.state.user.id) {
-                                    location.replace("/");
-                                }
-                            }}
-                        />
-                        <Link to="/showlatestusers">Back To Search</Link>
-                    </Route>
-                </BrowserRouter>
-            </>
-        );
-    }
+                <Route path="/showlatestuser/:id">
+                    <OtherProfiles
+                        isSessionUser={(id) => {
+                            if (id == state.user.id) {
+                                location.replace("/");
+                            }
+                        }}
+                    />
+                    <Link to="/showlatestusers">Back To Search</Link>
+                </Route>
+            </BrowserRouter>
+        </>
+    );
 }

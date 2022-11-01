@@ -6,6 +6,7 @@ export default function FindPeopleResultList({ users }) {
 
     // const history = useHistory();
 
+    // eslint-disable-next-line no-unused-vars
     const showProfile = (id) => {
         // console.log("id", id);
         // history.push(`/showlatestuser/${id}`);
