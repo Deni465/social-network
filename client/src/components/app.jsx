@@ -6,6 +6,7 @@ import Profile from "./Profile.jsx";
 import FindUser from "./findUser.jsx";
 import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
+// import FirendshipButton from "./FriendshipButton.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends Component {

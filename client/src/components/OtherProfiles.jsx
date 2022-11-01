@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import FriendshipButton from "./FriendshipButton.jsx";
 
 export default function OtherProfiles({ isSessionUser }) {
     const [otherUser, setOtherUser] = useState("");
@@ -25,6 +26,7 @@ export default function OtherProfiles({ isSessionUser }) {
             <p>
                 {otherUser.bio} {otherUser.email}
             </p>
+            <FriendshipButton />
         </>
     );
 }

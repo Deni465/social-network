@@ -34,6 +34,8 @@ app.use(
     })
 );
 
+///////////////////// Routes /////////////////////
+
 app.post("/register", (req, res) => {
     // console.log("Yes, register");
     const { first, last, email, password } = req.body;
@@ -82,6 +84,26 @@ app.get("/logout", (req, res) => {
         success: true,
     });
 });
+
+app.get("/user", (req, res) => {
+    db.getUserById(req.session.userId)
+        .then((data) => {
+            delete data[0].password;
+            res.json(data[0]);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+app.get("/user/id.json", (req, res) => {
+    console.log("userId", req.session.userId);
+    if (req.session.userId) {
+        return res.json({ userId: req.session.userId });
+    }
+});
+
+///////////////////// My Profile /////////////////////
 
 app.post("/profileimg", uploader.single("file"), (req, res) => {
     if (req.file) {
@@ -136,16 +158,7 @@ app.post("/bio", (req, res) => {
     });
 });
 
-app.get("/user", (req, res) => {
-    db.getUserById(req.session.userId)
-        .then((data) => {
-            delete data[0].password;
-            res.json(data[0]);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
+///////////////////// Other Profiles /////////////////////
 
 app.get("/getlatestuser/:id", (req, res) => {
     // console.log("req.params.id", req.params.id);
@@ -158,13 +171,6 @@ app.get("/getlatestuser/:id", (req, res) => {
         .catch((err) => {
             console.log(err);
         });
-});
-
-app.get("/user/id.json", (req, res) => {
-    console.log("userId", req.session.userId);
-    if (req.session.userId) {
-        return res.json({ userId: req.session.userId });
-    }
 });
 
 app.get("/getlatestusers", (req, res) => {
@@ -181,6 +187,8 @@ app.get("/getlatestusers", (req, res) => {
     }
 });
 
+///////////////////// Reset Password /////////////////////
+
 app.post("/getcode", (req, res) => {
     db.generateCode(req.body.email).then((data) => {
         res.json(data);
@@ -195,6 +203,19 @@ app.post("/reset", (req, res) => {
         }
     );
 });
+
+///////////////////// Friendship Request /////////////////////
+
+app.get("/getfriendship", (req, res) => {
+    db.getFriendshipInformation().then((data) => {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+app.post("/requestfriendship", (req,res)=>{
+    
+})
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
