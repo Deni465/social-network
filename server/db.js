@@ -193,3 +193,22 @@ module.exports.cancelFriendship = (user1, user2) => {
             console.log("Error in cancelFriendshipRequest:", error)
         );
 };
+
+///////////////////// Redux Show Friends & Wannabes /////////////////////
+
+module.exports.showFriendsAndWannabes = (id) => {
+    const sql = `SELECT users.id, first, last, accepted, img_url FROM users
+JOIN friendships
+ON (accepted = true AND recipient_id = $1 AND users.id = friendships.sender_id)
+OR (accepted = true AND sender_id = $1 AND users.id = friendships.recipient_id)
+OR (accepted = false AND recipient_id = $1 AND users.id = friendships.sender_id);`;
+    return db
+        .query(sql, [id])
+        .then((result) => {
+            // console.log("db result", result);
+            return result.rows;
+        })
+        .catch((error) =>
+            console.log("error in getting Friends and Wannabe's", error)
+        );
+};

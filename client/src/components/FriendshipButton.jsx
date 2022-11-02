@@ -47,7 +47,7 @@ export default function FriendshipButton() {
     }
 
     useEffect(() => {
-        console.log("id", id);
+        // console.log("id", id);
         checkFriendshipState();
     }, [id]);
 

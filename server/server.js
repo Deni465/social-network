@@ -269,6 +269,14 @@ app.post("/cancelfriendship/:id", (req, res) => {
     });
 });
 
+//////////////////// Redux /////////////////////
+
+app.get("/friends", (req, res) => {
+    db.showFriendsAndWannabes().then((data) => {
+        console.log("showFriendsAndWannabes", data);
+        res.json();
+    });
+});
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));

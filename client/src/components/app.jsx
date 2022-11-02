@@ -8,6 +8,7 @@ import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+
 export default function App() {
     const [state, setState] = useState({
         user: {
@@ -59,6 +60,8 @@ export default function App() {
         <>
             <div className="navbar">
                 <Logo />
+                <a href="/showlatestusers">🔍 Find Other Users</a>
+                <a href="/friends">Friends</a>
                 <ProfileImg
                     first={state.user.first}
                     last={state.user.last}
@@ -67,6 +70,7 @@ export default function App() {
                     mode="small"
                 />
                 <Logout />
+
                 {state.isPopupOpen && (
                     <Uploader
                         setProfilePic={setProfilePic}
@@ -88,7 +92,7 @@ export default function App() {
                             setBio(updatedBio);
                         }}
                     />
-                    <Link to="/showlatestusers">🔍 Find Other Users</Link>
+                    {/* <Link to="/showlatestusers">🔍 Find Other Users</Link> */}
                 </Route>
                 <Route path="/showlatestusers">
                     <FindUser />
