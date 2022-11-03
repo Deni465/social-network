@@ -197,6 +197,7 @@ module.exports.cancelFriendship = (user1, user2) => {
 ///////////////////// Redux Show Friends & Wannabes /////////////////////
 
 module.exports.showFriendsAndWannabes = (id) => {
+    // console.log("db.js", id);
     const sql = `SELECT users.id, first, last, accepted, img_url FROM users
 JOIN friendships
 ON (accepted = true AND recipient_id = $1 AND users.id = friendships.sender_id)

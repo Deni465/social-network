@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import friendsReducer from "../components/Friends.jsx";
+import friendReducer from "./friends.slice";
 
-const rootReducer = combineReducers({ friends: friendsReducer });
+const rootReducer = combineReducers({ friends: friendReducer });
 
 export default rootReducer;

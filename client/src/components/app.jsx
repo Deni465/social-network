@@ -6,8 +6,8 @@ import Profile from "./Profile.jsx";
 import FindUser from "./findUser.jsx";
 import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
+import Friends from "./Friends.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-
 
 export default function App() {
     const [state, setState] = useState({
@@ -58,28 +58,29 @@ export default function App() {
 
     return (
         <>
-            <div className="navbar">
-                <Logo />
-                <a href="/showlatestusers">🔍 Find Other Users</a>
-                <a href="/friends">Friends</a>
-                <ProfileImg
-                    first={state.user.first}
-                    last={state.user.last}
-                    img_url={state.user.img_url}
-                    togglePopup={togglePopup}
-                    mode="small"
-                />
-                <Logout />
-
-                {state.isPopupOpen && (
-                    <Uploader
-                        setProfilePic={setProfilePic}
-                        togglePopup={togglePopup}
-                    />
-                )}
-            </div>
-            <hr />
             <BrowserRouter>
+                <div className="navbar">
+                    <Logo />
+                    <ProfileImg
+                        first={state.user.first}
+                        last={state.user.last}
+                        img_url={state.user.img_url}
+                        togglePopup={togglePopup}
+                        mode="small"
+                    />
+                    <Link to="/showlatestusers">Find Users</Link>
+                    <Link to="/friendships">Friends</Link>
+                    <Link to="/">Back To Profile</Link>
+                    <Logout />
+
+                    {state.isPopupOpen && (
+                        <Uploader
+                            setProfilePic={setProfilePic}
+                            togglePopup={togglePopup}
+                        />
+                    )}
+                </div>
+                <hr />
                 <Route exact path="/">
                     <Profile
                         first={state.user.first}
@@ -92,11 +93,9 @@ export default function App() {
                             setBio(updatedBio);
                         }}
                     />
-                    {/* <Link to="/showlatestusers">🔍 Find Other Users</Link> */}
                 </Route>
                 <Route path="/showlatestusers">
                     <FindUser />
-                    <Link to="/">Back To Profile</Link>
                 </Route>
 
                 <Route path="/showlatestuser/:id">
@@ -107,7 +106,9 @@ export default function App() {
                             }
                         }}
                     />
-                    <Link to="/showlatestusers">Back To Search</Link>
+                </Route>
+                <Route path="/friendships">
+                    <Friends />
                 </Route>
             </BrowserRouter>
         </>

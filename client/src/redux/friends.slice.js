@@ -1,19 +1,28 @@
 ///////// Reducer /////////
 
-export default function friendReducer(friends = [], action) {
+export default function friendReducer(state = [], action) {
     if (action.type === "friends/received") {
+        // console.log("friends", action.payload.friends);
         return action.payload.friends;
     } else if (action.type === "friends/accept") {
-        const newFriends = friends.map(...friends, action.payload.id);
-        return newFriends;
+        // const newFriends = friends.map(...friends, action.payload.id);
+        // return {
+        //     ...state,
+        //     friends: state.friends.map((friend) =>
+        //         friend.id === action.payload.id
+        //             ? { ...friend, accpeted: true }
+        //             : friend
+        //     ),
+        // };
+        return state;
     } else if (action.type === "friends/unfriend") {
-        const newFriends = friends.map(
-            ...friends,
-            friends.slice(0, action.payload.id).slice(action.payload.id + 1)
-        );
-        return newFriends;
+        // const friends = friends.map(
+        // ...friends,
+        // friends.filter((friend)=>{})
+        // );
+        return state;
     }
-    return friends;
+    return state;
 }
 
 ///////// Actions /////////

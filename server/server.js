@@ -35,13 +35,15 @@ app.use(
 );
 
 app.use((req, res, next) => {
-    console.log("---------------------");
-    console.log("req.url:", req.url);
-    console.log("req.method:", req.method);
-    console.log("req.session:", req.session);
-    console.log("req.params:", req.params);
-    console.log("req.body:", req.body);
-    console.log("---------------------");
+    if (process.env.DEBUG == true) {
+        console.log("---------------------");
+        console.log("req.url:", req.url);
+        console.log("req.method:", req.method);
+        console.log("req.session:", req.session);
+        console.log("req.params:", req.params);
+        console.log("req.body:", req.body);
+        console.log("---------------------");
+    }
     next();
 });
 
@@ -108,7 +110,7 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/user/id.json", (req, res) => {
-    console.log("userId", req.session.userId);
+    // console.log("userId", req.session.userId);
     if (req.session.userId) {
         return res.json({ userId: req.session.userId });
     }
@@ -218,10 +220,10 @@ app.post("/reset", (req, res) => {
 ///////////////////// Friendship Request /////////////////////
 
 app.get("/getfriendship/:id", (req, res) => {
-    console.log("-----------------------------------------");
-    console.log("\t /getfriendship/:id ");
-    console.log("id: ", req.params.id, "\nuserId: ", req.session.userId);
-    console.log("-----------------------------------------");
+    // console.log("-----------------------------------------");
+    // console.log("\t /getfriendship/:id ");
+    // console.log("id: ", req.params.id, "\nuserId: ", req.session.userId);
+    // console.log("-----------------------------------------");
 
     db.getFriendshipInformation(req.session.userId, req.params.id).then(
         (data) => {
@@ -250,21 +252,21 @@ app.get("/getfriendship/:id", (req, res) => {
 
 app.post("/requestfriendship/:id", (req, res) => {
     db.createFriendship(req.session.userId, req.params.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
     });
 });
 
 app.post("/acceptfriendship/:id", (req, res) => {
     db.acceptFriendship(req.session.userId, req.params.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
     });
 });
 
 app.post("/cancelfriendship/:id", (req, res) => {
     db.cancelFriendship(req.session.userId, req.params.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
     });
 });
@@ -272,9 +274,9 @@ app.post("/cancelfriendship/:id", (req, res) => {
 //////////////////// Redux /////////////////////
 
 app.get("/friends", (req, res) => {
-    db.showFriendsAndWannabes().then((data) => {
-        console.log("showFriendsAndWannabes", data);
-        res.json();
+    db.showFriendsAndWannabes(req.session.userId).then((data) => {
+        // console.log("showFriendsAndWannabes", data);
+        res.json(data);
     });
 });
 
