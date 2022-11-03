@@ -34,10 +34,18 @@ export function setFriendsAction(friends) {
     };
 }
 
-export function addFriend(id) {
+export function addFriend(friends) {
+    return {
+        type: "friends/accept",
+        payload: { friends },
+    };
     // return action object that gets passed to reducer
 }
 
-export function removeFriend(id) {
+export function removeFriend(friends) {
+    return {
+        type: "friends/unfriend",
+        payload: { friends },
+    };
     // return action object that gets passed to reducer
 }

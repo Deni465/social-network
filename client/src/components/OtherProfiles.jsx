@@ -19,7 +19,7 @@ export default function OtherProfiles({ isSessionUser }) {
 
     return (
         <>
-            <img src={otherUser.img_url}></img>
+            <img src={otherUser.img_url} style={{ width: 100 }}></img>
             <p>
                 {otherUser.first} {otherUser.last}
             </p>

@@ -72,7 +72,6 @@ export default function App() {
                     <Link to="/friendships">Friends</Link>
                     <Link to="/">Back To Profile</Link>
                     <Logout />
-
                     {state.isPopupOpen && (
                         <Uploader
                             setProfilePic={setProfilePic}

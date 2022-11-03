@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFriendsAction } from "../redux/friends.slice.js";
+import { Link } from "react-router-dom";
 
 export default function Friends() {
     // useDispatch is used to dispatch action from component to redux store
@@ -20,12 +21,10 @@ export default function Friends() {
     });
 
     useEffect(() => {
-        console.log("friends from redux", friendrequests);
-        console.log("friends from redux pending", pendingrequests[0]);
+        // console.log("friends from redux", friendrequests);
+        // console.log("friends from redux pending", pendingrequests[0]);
     }, [friendrequests, pendingrequests]);
-    // const friends = useSelector((state) => {
-    //     return; //
-    // });
+
     useEffect(async () => {
         const result = await fetch("/friends");
         const friends = await result.json();
@@ -34,49 +33,63 @@ export default function Friends() {
         // FETCH all friends and friendrequest from server
         // dispatch(setFriends(friends)); // dispatch the correct action from redux/friends.slice.js
     }, []);
-    const acceptRequest = () => {
-        // POST request to server to update friendship list (add new friend)
-        // dispatch(addFriend(id)); // dispatch the correct action from redux/friends.slice.js
-    };
-    const endFriendship = () => {
-        // POST request to server to update friendship list (remove existing friend)
-        // dispatch(removeFriend(id)); // dispatch the correct action from redux/friends.slice.js
-    };
+
+    // const acceptRequest = () => {
+    //     // POST request to server to update friendship list (add new friend)
+    //     // dispatch(addFriend(id)); // dispatch the correct action from redux/friends.slice.js
+    // };
+
+    // const endFriendship = () => {
+    //     // POST request to server to update friendship list (remove existing friend)
+    //     // dispatch(removeFriend(id)); // dispatch the correct action from redux/friends.slice.js
+    // };
+
     return (
         <>
-            <h3>Show Friendship Requesters</h3>
-            {friendrequests && friendrequests.length > 0 && (
+            <h3>Friendship Requested</h3>
+            {pendingrequests && pendingrequests.length > 0 && (
                 <div className="notFriends">
                     <ul>
-                        {friendrequests.map((friendrequests) => (
-                            <li key={friendrequests}>
-                                <img
-                                    src={friendrequests.img_url}
-                                    style={{ width: 100 }}
-                                />{" "}
-                                <p>
-                                    {friendrequests.first} {friendrequests.last}
-                                </p>
+                        {pendingrequests.map((pendingrequests) => (
+                            <li key={pendingrequests.id}>
+                                {" "}
+                                <Link
+                                    to={`/showlatestuser/${pendingrequests.id}`}
+                                >
+                                    <img
+                                        src={pendingrequests.img_url}
+                                        style={{ width: 100 }}
+                                    />{" "}
+                                    <p>
+                                        {pendingrequests.first}{" "}
+                                        {pendingrequests.last}
+                                    </p>
+                                </Link>
                             </li>
                         ))}
                     </ul>
                 </div>
             )}
 
-            <h3>Show Accepted Friendships</h3>
-            {pendingrequests && pendingrequests.length > 0 && (
-                <div className="notFriends">
+            <h3>Friendships</h3>
+            {friendrequests && friendrequests.length > 0 && (
+                <div className="friends">
                     <ul>
-                        {pendingrequests.map((pendingrequests) => (
-                            <li key={pendingrequests}>
-                                <img
-                                    src={pendingrequests.img_url}
-                                    style={{ width: 100 }}
-                                />{" "}
-                                <p>
-                                    {pendingrequests.first}{" "}
-                                    {pendingrequests.last}
-                                </p>
+                        {friendrequests.map((friendrequests) => (
+                            <li key={friendrequests.id}>
+                                {" "}
+                                <Link
+                                    to={`/showlatestuser/${friendrequests.id}`}
+                                >
+                                    <img
+                                        src={friendrequests.img_url}
+                                        style={{ width: 100 }}
+                                    />{" "}
+                                    <p>
+                                        {friendrequests.first}{" "}
+                                        {friendrequests.last}
+                                    </p>
+                                </Link>
                             </li>
                         ))}
                     </ul>
