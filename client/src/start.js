@@ -7,6 +7,7 @@ import rootReducer from "./redux/root.reducer.js";
 import { initSocket } from "./socket.js";
 
 const store = legacy_createStore(rootReducer);
+initSocket(store);
 
 ReactDOM.render(<Welcome />, document.querySelector("main"));
 
@@ -16,7 +17,6 @@ fetch("/user/id.json")
         // console.log("data", data);
         if (!data.userId) {
             //set up socket
-            initSocket(store);
             ReactDOM.render(<Welcome />, document.querySelector("main"));
         } else {
             //console.log("render app");

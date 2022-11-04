@@ -14,7 +14,10 @@ const server = require("http").Server(app);
 // socket.io
 const io = require("socket.io")(server, {
     allowRequest: (req, callback) => {
-        callback(null, req.headers.referer.startesWith("http//:localhost:300"));
+        const isAllowed = req.headers.referer.startsWith(
+            "http://localhost:3000"
+        );
+        callback(null, isAllowed);
     },
 });
 
@@ -44,6 +47,7 @@ io.use((socket, next) => {
 io.on("connection", async (socket) => {
     const userId = socket.request.session.userId;
     if (!userId) {
+        console.log("🚀 ~ file: server.js ~ line 50 ~ io.on ~ userId", userId);
         return socket.disconnect(true);
     }
     // latest message
@@ -51,9 +55,10 @@ io.on("connection", async (socket) => {
 
     socket.emit("chatMessages", latestMessages);
     // listen for "chatemessage" event
-    socket.on("chatMessage", (text) => {
+    socket.on("chatMessage", async (text) => {
+        console.log("text", text);
         // 1. store message in database
-        const newMessage = db.insertMessages();
+        const newMessage = await db.insertMessage(text.id, text.message);
         // 2. broadcast the message to ALL connected sockets
         // incl all relevent info img, name, id
         io.emit("chatMessage", newMessage);

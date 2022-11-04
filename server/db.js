@@ -216,16 +216,16 @@ OR (accepted = false AND recipient_id = $1 AND users.id = friendships.sender_id)
 
 ///////////////////// Chat /////////////////////
 
-module.exports.insertMessages = (id, message) => {
-    console.log("db.js insertMessage", id);
+module.exports.insertMessage = (id, message) => {
+    console.log("db.js insertMessage", id, message);
     // insert messages
-    const sql = `INSERT INTO friendships (sender_id, recipient_id, message)
-    VALUES ($1, $2, $3) RETURNING *;`;
+    const sql = `INSERT INTO chats (sender_id, message)
+    VALUES ($1, $2) RETURNING *;`;
     return db
         .query(sql, [id, message])
         .then((result) => {
             // console.log("db result", result);
-            return result.rows;
+            return result.rows[0];
         })
         .catch((error) => console.log("error in inserting the message", error));
 };
@@ -236,11 +236,9 @@ module.exports.getMessages = (limit = 10) => {
     // FROM chats JOIN users ON ... ORDER BY DESC
     const sql = `SELECT chats.message, chats.created_at, users.first, users.last, users.img_url FROM chats JOIN users ON chats.sender_id = users.id  
     ORDER BY users.id DESC
-    LIMIT 10;`;
+    LIMIT $1;`;
     return db
         .query(sql, [limit])
         .then((result) => result.rows)
-        .catch((error) =>
-            console.log("error get friendship information", error)
-        );
+        .catch((error) => console.log("error get messages", error));
 };
