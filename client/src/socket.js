@@ -10,17 +10,13 @@ export const initSocket = (store) => {
 
         socket.on("chatMessages", (data) => {
             if (data) {
-                console.log("latest messages", data);
                 //add messages to redux store
                 store.dispatch(chatMessagesReceived(data));
+                console.log("data", data);
             }
         });
 
         socket.on("chatMessage", (data) => {
-            console.log(
-                "🚀 ~ file: socket.js ~ line 24 ~ socket.on ~ data",
-                data
-            );
             //add message to the redux store
             store.dispatch(chatMessageReceived(data));
         });

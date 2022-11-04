@@ -234,8 +234,8 @@ module.exports.getMessages = (limit = 10) => {
     // show messages
     // latest $1
     // FROM chats JOIN users ON ... ORDER BY DESC
-    const sql = `SELECT chats.message, chats.created_at, users.first, users.last, users.img_url FROM chats JOIN users ON chats.sender_id = users.id  
-    ORDER BY users.id DESC
+    const sql = `SELECT chats.id, chats.message, chats.created_at, users.first, users.last, users.img_url FROM chats JOIN users ON chats.sender_id = users.id  
+    ORDER BY chats.created_at DESC
     LIMIT $1;`;
     return db
         .query(sql, [limit])

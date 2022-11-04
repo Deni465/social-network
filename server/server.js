@@ -52,13 +52,14 @@ io.on("connection", async (socket) => {
     }
     // latest message
     const latestMessages = await db.getMessages();
+    console.log("latest messages", latestMessages);
 
     socket.emit("chatMessages", latestMessages);
     // listen for "chatemessage" event
     socket.on("chatMessage", async (text) => {
         console.log("text", text);
         // 1. store message in database
-        const newMessage = await db.insertMessage(text.id, text.message);
+        const newMessage = await db.insertMessage(userId, text.message);
         // 2. broadcast the message to ALL connected sockets
         // incl all relevent info img, name, id
         io.emit("chatMessage", newMessage);

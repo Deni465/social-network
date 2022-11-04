@@ -27,5 +27,3 @@ module.exports.cookieSession = cookieSession({
     maxAge: 1000 * 60 * 60 * 24 * 14, // 24h
     sameSite: true,
 });
-
-// Validation here

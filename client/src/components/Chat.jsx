@@ -12,7 +12,7 @@ export default function Chat() {
             // no need to `fetch`! Just emit via the socket.
             console.log("message", message);
 
-            socket.emit("chatMessage", { message: message.trim(), id: 1 });
+            socket.emit("chatMessage", { message: message.trim() });
             // clear the input field!
         }
     };
@@ -25,7 +25,7 @@ export default function Chat() {
     useEffect(() => {}, []);
 
     // ...
-
+    console.log("messages", messages);
     return (
         // ...
         <>
@@ -39,9 +39,16 @@ export default function Chat() {
                     value={message}
                 ></textarea>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column-reverse" }}>
                 {messages.map((message, index) => (
-                    <p key={index}>{message.message}</p>
+                    <div key={index}>
+                        {" "}
+                        <p>{message.message}</p>
+                        <p>{message.first}</p>
+                        <p>{message.last}</p>
+                        <img src={message.img_url} style={{ width: 50 }}></img>
+                        <p>{message.created_at}</p>
+                    </div>
                 ))}
             </div>
         </>
