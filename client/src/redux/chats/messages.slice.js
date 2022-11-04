@@ -5,7 +5,7 @@ export default function messagesReducer(messages = [], action) {
             return action.payload.messages;
         case "/messages/received-one":
             console.log("new message: ", action.payload.message);
-            return [...messages, action.payload.message];
+            return [action.payload.message, ...messages];
         default:
             return messages;
     }

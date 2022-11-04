@@ -29,16 +29,6 @@ export default function Chat() {
     return (
         // ...
         <>
-            <div className="new-message">
-                <p>{message}</p>
-                <textarea
-                    name="message"
-                    placeholder="Your message here"
-                    onKeyDown={(e) => onChatKeyDown(e)}
-                    onChange={(e) => onMessageChange(e)}
-                    value={message}
-                ></textarea>
-            </div>
             <div style={{ display: "flex", flexDirection: "column-reverse" }}>
                 {messages.map((message, index) => (
                     <div key={index}>
@@ -50,6 +40,16 @@ export default function Chat() {
                         <p>{message.created_at}</p>
                     </div>
                 ))}
+            </div>
+            <div className="new-message">
+                {/* <p>{message}</p> */}
+                <textarea
+                    name="message"
+                    placeholder="Your message here"
+                    onKeyDown={(e) => onChatKeyDown(e)}
+                    onChange={(e) => onMessageChange(e)}
+                    value={message}
+                ></textarea>
             </div>
         </>
     );
