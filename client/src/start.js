@@ -4,6 +4,7 @@ import App from "./components/App.jsx";
 import { Provider } from "react-redux";
 import { legacy_createStore } from "redux";
 import rootReducer from "./redux/root.reducer.js";
+import { initSocket } from "./socket.js";
 
 const store = legacy_createStore(rootReducer);
 
@@ -14,9 +15,11 @@ fetch("/user/id.json")
     .then((data) => {
         // console.log("data", data);
         if (!data.userId) {
+            //set up socket
+            initSocket(store);
             ReactDOM.render(<Welcome />, document.querySelector("main"));
         } else {
-            // console.log("render app");
+            //console.log("render app");
             ReactDOM.render(
                 <Provider store={store}>
                     <App />

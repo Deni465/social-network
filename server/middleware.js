@@ -1,6 +1,8 @@
 const path = require("path");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
+const cookieSession = require("cookie-session");
+const { SESSION_SECRET } = process.env;
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, "uploads"),
@@ -19,3 +21,11 @@ module.exports.uploader = multer({
         fileSize: 2097152,
     },
 });
+
+module.exports.cookieSession = cookieSession({
+    secret: SESSION_SECRET,
+    maxAge: 1000 * 60 * 60 * 24 * 14, // 24h
+    sameSite: true,
+});
+
+// Validation here

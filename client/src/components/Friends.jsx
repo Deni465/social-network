@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFriendsAction } from "../redux/friends.slice.js";
+import {
+    setFriendsAction,
+    addFriend,
+    removeFriend,
+} from "../redux/friends/friends.slice.js";
 import { Link } from "react-router-dom";
 
 export default function Friends() {
@@ -34,15 +38,15 @@ export default function Friends() {
         // dispatch(setFriends(friends)); // dispatch the correct action from redux/friends.slice.js
     }, []);
 
-    // const acceptRequest = () => {
-    //     // POST request to server to update friendship list (add new friend)
-    //     // dispatch(addFriend(id)); // dispatch the correct action from redux/friends.slice.js
-    // };
+    const acceptRequest = () => {
+        // POST request to server to update friendship list (add new friend)
+        // dispatch(addFriend(friends)); // dispatch the correct action from redux/friends.slice.js
+    };
 
-    // const endFriendship = () => {
-    //     // POST request to server to update friendship list (remove existing friend)
-    //     // dispatch(removeFriend(id)); // dispatch the correct action from redux/friends.slice.js
-    // };
+    const endFriendship = () => {
+        // POST request to server to update friendship list (remove existing friend)
+        // dispatch(removeFriend(friends)); // dispatch the correct action from redux/friends.slice.js
+    };
 
     return (
         <>
@@ -64,6 +68,8 @@ export default function Friends() {
                                         {pendingrequests.first}{" "}
                                         {pendingrequests.last}
                                     </p>
+                                    {/* <button>Accept</button>
+                                    <button>Reject</button> */}
                                 </Link>
                             </li>
                         ))}
@@ -90,6 +96,7 @@ export default function Friends() {
                                         {friendrequests.last}
                                     </p>
                                 </Link>
+                                <button>Unfriend</button>
                             </li>
                         ))}
                     </ul>

@@ -7,6 +7,7 @@ import FindUser from "./findUser.jsx";
 import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
 import Friends from "./Friends.jsx";
+import Chat from "../components/Chat.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default function App() {
@@ -71,6 +72,7 @@ export default function App() {
                     <Link to="/showlatestusers">Find Users</Link>
                     <Link to="/friendships">Friends</Link>
                     <Link to="/">Back To Profile</Link>
+                    <Link to="/chat">Chat</Link>
                     <Logout />
                     {state.isPopupOpen && (
                         <Uploader
@@ -108,6 +110,9 @@ export default function App() {
                 </Route>
                 <Route path="/friendships">
                     <Friends />
+                </Route>
+                <Route path="/chat">
+                    <Chat />
                 </Route>
             </BrowserRouter>
         </>

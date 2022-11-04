@@ -213,3 +213,34 @@ OR (accepted = false AND recipient_id = $1 AND users.id = friendships.sender_id)
             console.log("error in getting Friends and Wannabe's", error)
         );
 };
+
+///////////////////// Chat /////////////////////
+
+module.exports.insertMessages = (id, message) => {
+    console.log("db.js insertMessage", id);
+    // insert messages
+    const sql = `INSERT INTO friendships (sender_id, recipient_id, message)
+    VALUES ($1, $2, $3) RETURNING *;`;
+    return db
+        .query(sql, [id, message])
+        .then((result) => {
+            // console.log("db result", result);
+            return result.rows;
+        })
+        .catch((error) => console.log("error in inserting the message", error));
+};
+
+module.exports.getMessages = (limit = 10) => {
+    // show messages
+    // latest $1
+    // FROM chats JOIN users ON ... ORDER BY DESC
+    const sql = `SELECT chats.message, chats.created_at, users.first, users.last, users.img_url FROM chats JOIN users ON chats.sender_id = users.id  
+    ORDER BY users.id DESC
+    LIMIT 10;`;
+    return db
+        .query(sql, [limit])
+        .then((result) => result.rows)
+        .catch((error) =>
+            console.log("error get friendship information", error)
+        );
+};

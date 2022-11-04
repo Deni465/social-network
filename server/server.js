@@ -2,12 +2,21 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const path = require("path");
-const cookieSession = require("cookie-session");
 require("dotenv").config();
 const db = require("./db");
 const { uploader } = require("./middleware.js");
 const aws = require("aws-sdk");
 const fs = require("fs");
+const { cookieSession } = require("./middleware");
+
+const server = require("http").Server(app);
+
+// socket.io
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) => {
+        callback(null, req.headers.referer.startesWith("http//:localhost:300"));
+    },
+});
 
 let secrets;
 if (process.env.NODE_ENV == "production") {
@@ -26,13 +35,30 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-    cookieSession({
-        secret: process.env.SESSION_SECRET,
-        maxAge: 1000 * 60 * 60 * 24 * 14, // 24h
-        sameSite: true,
-    })
-);
+app.use(cookieSession);
+
+io.use((socket, next) => {
+    cookieSession(socket.request, socket.request.res, next);
+});
+
+io.on("connection", async (socket) => {
+    const userId = socket.request.session.userId;
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+    // latest message
+    const latestMessages = await db.getMessages();
+
+    socket.emit("chatMessages", latestMessages);
+    // listen for "chatemessage" event
+    socket.on("chatMessage", (text) => {
+        // 1. store message in database
+        const newMessage = db.insertMessages();
+        // 2. broadcast the message to ALL connected sockets
+        // incl all relevent info img, name, id
+        io.emit("chatMessage", newMessage);
+    });
+});
 
 app.use((req, res, next) => {
     if (process.env.DEBUG == true) {
@@ -231,7 +257,7 @@ app.get("/getfriendship/:id", (req, res) => {
             // initial value = no friendship => buttonStatus = request Friendship
             // find in FriendshipButton buttonStatus arr
             const friendshipResult = { friendshipStatus: 0 };
-            console.log("data.length", data.length);
+            // console.log("data.length", data.length);
             if (data.length == 1) {
                 if (data[0].accepted == true) {
                     // status friendship accepted => buttonStatus Unfriend
@@ -284,6 +310,6 @@ app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });

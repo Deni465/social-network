@@ -2,9 +2,10 @@
 
 export default function friendReducer(state = [], action) {
     if (action.type === "friends/received") {
-        // console.log("friends", action.payload.friends);
+        console.log("friends", action.payload.friends);
         return action.payload.friends;
     } else if (action.type === "friends/accept") {
+        console.log("action.payload", action.payload.friends.id);
         // const newFriends = friends.map(...friends, action.payload.id);
         // return {
         //     ...state,
