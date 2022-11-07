@@ -60,8 +60,10 @@ io.on("connection", async (socket) => {
         console.log("text", text);
         // 1. store message in database
         const newMessage = await db.insertMessage(userId, text.message);
+
         // 2. broadcast the message to ALL connected sockets
         // incl all relevent info img, name, id
+
         io.emit("chatMessage", newMessage);
     });
 });

@@ -24,6 +24,7 @@ export default function FindUser() {
             {/* <p>{userQuery}</p> */}
             <input
                 type="text"
+                placeholder="search here"
                 onChange={(e) => {
                     setUserQuery(e.target.value);
                 }}

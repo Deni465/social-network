@@ -69,10 +69,18 @@ export default function App() {
                         togglePopup={togglePopup}
                         mode="small"
                     />
-                    <Link to="/showlatestusers">Find Users</Link>
-                    <Link to="/friendships">Friends</Link>
-                    <Link to="/">Back To Profile</Link>
-                    <Link to="/chat">Chat</Link>
+                    <Link className="links" to="/showlatestusers">
+                        Find Users
+                    </Link>
+                    <Link className="links" to="/friendships">
+                        Friends
+                    </Link>
+                    <Link className="links" to="/">
+                        Back To Profile
+                    </Link>
+                    <Link className="links" to="/chat">
+                        Chat
+                    </Link>
                     <Logout />
                     {state.isPopupOpen && (
                         <Uploader

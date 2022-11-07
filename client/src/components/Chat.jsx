@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { socket } from "../socket";
 
 export default function Chat() {
@@ -14,6 +14,7 @@ export default function Chat() {
 
             socket.emit("chatMessage", { message: message.trim() });
             // clear the input field!
+            setMessage("");
         }
     };
 
@@ -22,10 +23,8 @@ export default function Chat() {
         setMessage(e.target.value);
     };
 
-    useEffect(() => {}, []);
-
     // ...
-    console.log("messages", messages);
+    // console.log("messages", messages);
     return (
         // ...
         <>

@@ -1,7 +1,7 @@
 import { Component } from "react";
 
 const defaultImg =
-    "https://i.pinimg.com/564x/78/d2/68/78d26806df761d91c412103b1c816b9a.jpg";
+    "https://i.pinimg.com/originals/1d/52/e9/1d52e9f43419bd4415662b6462f9b0f3.jpg";
 
 export default class ProfileImg extends Component {
     constructor(props) {

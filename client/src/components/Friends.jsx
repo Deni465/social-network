@@ -58,13 +58,14 @@ export default function Friends() {
                             <li key={pendingrequests.id}>
                                 {" "}
                                 <Link
+                                    className="links"
                                     to={`/showlatestuser/${pendingrequests.id}`}
                                 >
                                     <img
                                         src={pendingrequests.img_url}
                                         style={{ width: 100 }}
                                     />{" "}
-                                    <p>
+                                    <p className="links">
                                         {pendingrequests.first}{" "}
                                         {pendingrequests.last}
                                     </p>
@@ -85,18 +86,31 @@ export default function Friends() {
                             <li key={friendrequests.id}>
                                 {" "}
                                 <Link
+                                    className="links"
                                     to={`/showlatestuser/${friendrequests.id}`}
                                 >
                                     <img
                                         src={friendrequests.img_url}
                                         style={{ width: 100 }}
                                     />{" "}
-                                    <p>
+                                    <p className="links">
                                         {friendrequests.first}{" "}
                                         {friendrequests.last}
                                     </p>
                                 </Link>
-                                <button>Unfriend</button>
+                                <div className="container">
+                                    <div className="button-container">
+                                        <span className="mask">UNFRIEND</span>
+                                        <button
+                                            className="button"
+                                            name="Hover"
+                                            type="submit"
+                                        >
+                                            UNFRIEND
+                                        </button>
+                                    </div>
+                                </div>
+                                {/* <button className="button">Unfriend</button> */}
                             </li>
                         ))}
                     </ul>

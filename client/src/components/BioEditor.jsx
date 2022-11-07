@@ -47,10 +47,27 @@ export default class BioEditor extends Component {
                     rows="10"
                     placeholder="This your Bio! You can write here something about yourself 😊"
                 ></textarea>
+                <div className="container">
+                    <div className="button-container">
+                        <span className="mask">SAVE</span>
+                        <button
+                            className="button"
+                            name="Hover"
+                            type="submit"
+                            onClick={this.submitForm}
+                        >
+                            SAVE
+                        </button>
+                    </div>
+                </div>
 
-                <button type="submit" onClick={this.submitForm}>
+                {/* <button
+                    className="button"
+                    type="submit"
+                    onClick={this.submitForm}
+                >
                     Save
-                </button>
+                </button> */}
             </div>
         );
     }

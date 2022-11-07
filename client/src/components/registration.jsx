@@ -9,6 +9,7 @@ export default class Registration extends React.Component {
             email: "",
             password: "",
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFirstChange = this.handleFirstChange.bind(this);
     }
@@ -58,7 +59,8 @@ export default class Registration extends React.Component {
             password: this.state.password,
         };
         console.log("New User: ", newUser);
-        console.log("Fetch register");
+        // console.log("Fetch register");
+
         fetch("/register", {
             method: "POST",
             body: JSON.stringify(newUser),
@@ -77,7 +79,7 @@ export default class Registration extends React.Component {
         return (
             <>
                 <h2>{"Registration"}</h2>
-                <div>
+                <div className="right">
                     <form action="POST" onSubmit={this.handleSubmit}>
                         <div id="firstform">
                             <label htmlFor="first">First Name</label>
@@ -119,8 +121,18 @@ export default class Registration extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-
-                        <button type="submit">Register</button>
+                        <div className="container">
+                            <div className="button-container">
+                                <span className="mask">REGISTER</span>
+                                <button
+                                    className="button"
+                                    name="Hover"
+                                    type="submit"
+                                >
+                                    REGISTER
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </>

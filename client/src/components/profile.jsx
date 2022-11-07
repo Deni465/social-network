@@ -53,9 +53,32 @@ export default class Profile extends Component {
                     {!this.state.textareaIsOpen && (
                         <div>
                             <p>{this.props.bio}</p>{" "}
-                            <button type="submit" onClick={this.toggleTextarea}>
-                                {this.props.bio ? "Edit Bio" : "Add Bio"}
-                            </button>
+                            {/* <button
+                                className="button"
+                                type="submit"
+                                onClick={this.toggleTextarea}
+                            > */}
+                            <div className="container">
+                                <div className="button-container">
+                                    <span className="mask">
+                                        {" "}
+                                        {this.props.bio
+                                            ? "EDIT BIO"
+                                            : "ADD BIO"}
+                                    </span>
+                                    <button
+                                        className="button"
+                                        name="Hover"
+                                        type="submit"
+                                        onClick={this.toggleTextarea}
+                                    >
+                                        {this.props.bio
+                                            ? "EDIT BIO"
+                                            : "ADD BIO"}
+                                    </button>
+                                </div>
+                            </div>
+                            {/* </button> */}
                         </div>
                     )}
                 </div>

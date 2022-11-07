@@ -80,8 +80,21 @@ export default class Login extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-
-                        <button type="submit">Login</button>
+                        <div className="container">
+                            <div className="button-container">
+                                <span className="mask">LOGIN</span>
+                                <button
+                                    className="button"
+                                    name="Hover"
+                                    type="submit"
+                                >
+                                    LOGIN
+                                </button>
+                            </div>
+                        </div>
+                        {/* <button className="button" type="submit">
+                            Login
+                        </button> */}
                     </form>
                 </div>
             </>

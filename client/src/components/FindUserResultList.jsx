@@ -16,9 +16,9 @@ export default function FindPeopleResultList({ users }) {
         <ul>
             {users.map((user) => (
                 <li key={user.id} onClick={() => showProfile(user.id)}>
-                    <Link to={`/showlatestuser/${user.id}`}>
+                    <Link className="links" to={`/showlatestuser/${user.id}`}>
                         <img src={user.img_url} style={{ width: 100 }} />{" "}
-                        <p>
+                        <p className="links">
                             {user.first} {user.last}
                         </p>
                     </Link>

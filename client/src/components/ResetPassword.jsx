@@ -122,8 +122,18 @@ export default class ResetPassword extends React.Component {
                                 </>
                             )}
                         </div>
-
-                        <button type="submit">Submit</button>
+                        <div className="container">
+                            <div className="button-container">
+                                <span className="mask">SUBMIT</span>
+                                <button
+                                    className="button"
+                                    name="Hover"
+                                    type="submit"
+                                >
+                                    SUBMIT
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </>

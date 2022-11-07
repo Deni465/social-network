@@ -1,13 +1,12 @@
 import React from "react";
+import logo from "../../public/assets/balloon-logo.png";
+// const logo = require("../assets/balloon-logo.png");
 
 export default class Logo extends React.Component {
     render() {
         return (
             <>
-                <img className="grinch"
-                    src="https://cdn-icons-png.flaticon.com/512/1224/1224423.png"
-                    alt="olives"
-                />
+                <img className="logo" src={logo} alt="balloon" />
             </>
         );
     }

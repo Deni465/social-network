@@ -53,9 +53,31 @@ export default function FriendshipButton() {
 
     return (
         <>
-            <button name="reqFriendship" type="submit" onClick={handleClick}>
+            {/* <button
+                className="button"
+                name="reqFriendship"
+                type="submit"
+                onClick={handleClick}
+            >
                 {buttonStatus[friendshipState]}
-            </button>
+            </button> */}
+            <div className="container">
+                <div className="button-container">
+                    <span className="mask">
+                        {" "}
+                        {buttonStatus[friendshipState]}
+                    </span>
+
+                    <button
+                        className="button"
+                        onClick={handleClick}
+                        name="Hover"
+                        type="submit"
+                    >
+                        {buttonStatus[friendshipState]}
+                    </button>
+                </div>
+            </div>
         </>
     );
 }

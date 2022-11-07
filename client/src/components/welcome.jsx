@@ -8,28 +8,35 @@ import ResetPassword from "./ResetPassword.jsx";
 export default class Welcome extends React.Component {
     render() {
         return (
-            <>
-                <h1>Welcome To The Grinch-Club</h1>
-                <p>
-                    Everyone Who Loves Christmas As Much As The Grinch Or Even
-                    The Grinch Or Just The Color Green Is Welcome Here!
-                </p>
-                <Logo />
-                <BrowserRouter>
-                    <Route exact path="/">
-                        <Registration />
-                        <Link to="/login">Click here to Log in!</Link>
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                        <Link to="/">Click here to register!</Link>
-                        <Link to="/resetpassword">Forgot My Password</Link>
-                    </Route>
-                    <Route path="/resetpassword">
-                        <ResetPassword />
-                    </Route>
-                </BrowserRouter>
-            </>
+            <div className="container">
+                <div className="left">
+                    <h1>Balloons</h1>
+                    <p>Can Be Your Best Friend Or Your Worst Nightmare</p>
+                    <Logo />
+                </div>
+                <div className="right">
+                    <BrowserRouter>
+                        <Route exact path="/">
+                            <Registration />
+                            <Link className="links" to="/login">
+                                Click here to Log in!
+                            </Link>
+                        </Route>
+                        <Route path="/login">
+                            <Login />
+                            <Link className="links" to="/">
+                                Click here to register!
+                            </Link>
+                            <Link className="links" to="/resetpassword">
+                                Forgot My Password
+                            </Link>
+                        </Route>
+                        <Route path="/resetpassword">
+                            <ResetPassword />
+                        </Route>
+                    </BrowserRouter>
+                </div>
+            </div>
         );
     }
 }

@@ -14,9 +14,22 @@ const Logout = () => {
 
     return (
         <>
-            <button name="logout" onClick={logout}>
+            <div className="container">
+                <div className="button-container">
+                    <span className="mask">LOGOUT</span>
+                    <button
+                        className="button"
+                        name="logout"
+                        // type="submit"
+                        onClick={logout}
+                    >
+                        LOGOUT
+                    </button>
+                </div>
+            </div>
+            {/* <button className="button" name="logout" onClick={logout}>
                 Logout
-            </button>
+            </button> */}
         </>
     );
 };

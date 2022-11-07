@@ -2,6 +2,8 @@ const path = require("path");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const cookieSession = require("cookie-session");
+
+
 const { SESSION_SECRET } = process.env;
 
 const storage = multer.diskStorage({
@@ -27,3 +29,4 @@ module.exports.cookieSession = cookieSession({
     maxAge: 1000 * 60 * 60 * 24 * 14, // 24h
     sameSite: true,
 });
+

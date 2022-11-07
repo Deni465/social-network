@@ -1,16 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Fasthand&family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Fasthand&family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Fasthand&family=Satisfy&family=Yanone+Kaffeesatz:wght@200&display=swap");
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    background: rgb(73, 118, 190);
+    background: linear-gradient(
+        0deg,
+        rgba(73, 118, 190, 1) 0%,
+        rgba(255, 255, 255, 0.8870141806722689) 50%,
+        rgba(221, 95, 149, 1) 100%
+    );
 }
 
-.grinch {
-    width: 300px;
+.logo {
+    width: 100vh;
 }
 
 .myProfile {
     display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+}
+
+.left {
+    /* background-color: #ff9e2c; */
+    flex: 1;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.right {
+    /* background-color: #b6701e; */
+    flex: 1;
+    padding: 1rem;
     flex-direction: column;
 }
 
@@ -25,10 +54,27 @@ div {
     display: flex;
     flex-direction: column;
     margin: 10px;
+    font-family: "Satisfy", cursive;
 }
 
 form {
-    width: 30%;
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+input {
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+}
+
+label {
+    margin: 5px;
 }
 
 .navbar {
@@ -36,15 +82,92 @@ form {
     display: flex;
 }
 
-button {
-    width: auto;
-}
-
 .profile {
     width: 145px;
     height: 100%;
 }
 
-p {
+p,
+h1,
+h2,
+h3 {
     margin: 10px;
+    font-family: "Satisfy", cursive;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    margin: 4px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+}
+
+/* ------------------- Button */
+
+.button-container {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 40vh; */
+    overflow: hidden;
+    transition: 0.5s;
+    border: 1px solid rgba(247, 171, 171, 0.476);
+}
+.button-container button {
+    width: 300px;
+    height: 50px;
+    font-size: 15px;
+    /* font-family: "Satisfy", cursive; */
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    font-weight: lighter;
+
+    background: rgba(221, 95, 149, 1);
+    -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
+    mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
+    -webkit-mask-size: 2300% 100%;
+    mask-size: 2300% 100%;
+    border: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    animation: anim2 0.7s steps(22) forwards;
+}
+.button-container button:hover {
+    animation: anim1 0.7s steps(22) forwards;
+}
+.mask {
+    position: absolute;
+    color: rgba(221, 95, 149, 1);
+    text-align: center;
+    width: 101%;
+    /* font-family: "Satisfy", cursive; */
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    font-weight: lighter;
+    font-size: 15px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+@keyframes anim1 {
+    from {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+    }
+    to {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+    }
+}
+@keyframes anim2 {
+    from {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+    }
+    to {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+    }
 }
