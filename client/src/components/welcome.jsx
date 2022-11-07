@@ -19,13 +19,13 @@ export default class Welcome extends React.Component {
                         <Route exact path="/">
                             <Registration />
                             <Link className="links" to="/login">
-                                Click here to Log in!
+                                Click Here To Log in!
                             </Link>
                         </Route>
                         <Route path="/login">
                             <Login />
                             <Link className="links" to="/">
-                                Click here to register!
+                                Click Here To Register!
                             </Link>
                             <Link className="links" to="/resetpassword">
                                 Forgot My Password
@@ -33,6 +33,9 @@ export default class Welcome extends React.Component {
                         </Route>
                         <Route path="/resetpassword">
                             <ResetPassword />
+                            <Link className="links" to="/login">
+                                Click Here To Log in!
+                            </Link>
                         </Route>
                     </BrowserRouter>
                 </div>
