@@ -7,10 +7,10 @@ export default function FriendshipButton() {
     // console.log("UserInfo", isSessionUser);
 
     const buttonStatus = [
-        "Request Friendship",
-        "Unfriend",
-        "Accept Request",
-        "Cancel Request",
+        "REQUEST FRIENDSHIP",
+        "UNFRIEND",
+        "ACCEPT REQUEST",
+        "CANCEL REQUEST",
     ];
 
     // const [friendship, setFriendship] = useState();

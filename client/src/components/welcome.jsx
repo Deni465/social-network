@@ -12,9 +12,9 @@ export default class Welcome extends React.Component {
                 <div className="left">
                     <h1>Balloons</h1>
                     <p>Can Be Your Best Friend Or Your Worst Nightmare</p>
-                    <Logo />
+                    <Logo mode="medium" />
                 </div>
-                <div className="right">
+                <div className="right bg">
                     <BrowserRouter>
                         <Route exact path="/">
                             <Registration />

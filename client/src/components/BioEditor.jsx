@@ -36,6 +36,7 @@ export default class BioEditor extends Component {
     }
 
     render() {
+        const mode = this.props.mode || "medium";
         return (
             <div className="bio">
                 <textarea
@@ -47,7 +48,7 @@ export default class BioEditor extends Component {
                     rows="10"
                     placeholder="This your Bio! You can write here something about yourself 😊"
                 ></textarea>
-                <div className="container">
+                <div className={`container-${mode}`}>
                     <div className="button-container">
                         <span className="mask">SAVE</span>
                         <button
@@ -62,11 +63,11 @@ export default class BioEditor extends Component {
                 </div>
 
                 {/* <button
-                    className="button"
+                    className="biobutton"
                     type="submit"
                     onClick={this.submitForm}
                 >
-                    Save
+                    SAVE
                 </button> */}
             </div>
         );

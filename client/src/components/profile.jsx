@@ -29,6 +29,7 @@ export default class Profile extends Component {
     }
 
     render() {
+        const mode = this.props.mode || "medium";
         return (
             <div className="profileHome">
                 <ProfileImg
@@ -58,7 +59,7 @@ export default class Profile extends Component {
                                 type="submit"
                                 onClick={this.toggleTextarea}
                             > */}
-                            <div className="container">
+                            <div className={`container-${mode}`}>
                                 <div className="button-container">
                                     <span className="mask">
                                         {" "}

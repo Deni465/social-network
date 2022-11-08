@@ -80,7 +80,7 @@ export default class Registration extends React.Component {
             <>
                 <h2>{"Registration"}</h2>
                 <div className="right">
-                    <form action="POST" onSubmit={this.handleSubmit}>
+                    <form className="register" action="POST" onSubmit={this.handleSubmit}>
                         <div id="firstform">
                             <label htmlFor="first">First Name</label>
                             <input

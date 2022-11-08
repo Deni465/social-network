@@ -4,15 +4,64 @@ body {
     padding: 0;
 }
 
+/* main {
+    width: 100%;
+} */
+
+.nav-img {
+    height: fit-content;
+    margin-left: 15%;
+    border: 0;
+    background-color: transparent;
+}
+
 .nav-img-medium {
     width: 150px;
+    height: fit-content;
 }
 
 .nav-img-small {
+    border: rgb(198, 95, 91) 2px solid;
     object-fit: scale-down;
     width: 60px;
+    box-shadow: 2px 3px 10px rgb(224 110 107);
 }
 
 .grinch {
     object-fit: scale-down;
+}
+
+.profile {
+    width: 145px;
+    height: 100%;
+}
+
+.navbar {
+    height: 100px;
+    display: flex;
+    box-shadow: 10px 10px 10px rgb(224 110 107);
+    width: 100%;
+    display: flex;
+    margin: 10px;
+}
+
+/* -------------Logo */
+
+.logo-small {
+    width: 140px;
+    box-shadow: 2px 3px 10px rgb(224 110 107);
+    border-radius: 62%;
+}
+
+.logout-small {
+    width: 100px;
+}
+
+.container-small {
+    height: 100px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
 }

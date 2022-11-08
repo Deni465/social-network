@@ -4,9 +4,10 @@ import logo from "../../public/assets/balloon-logo.png";
 
 export default class Logo extends React.Component {
     render() {
+        const mode = this.props.mode || "medium";
         return (
             <>
-                <img className="logo" src={logo} alt="balloon" />
+                <img className={`logo-${mode}`} src={logo} alt="balloon" />
             </>
         );
     }

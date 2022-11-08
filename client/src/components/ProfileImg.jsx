@@ -16,7 +16,7 @@ export default class ProfileImg extends Component {
         return (
             <button className={`nav-img`} onClick={this.props.togglePopup}>
                 <img
-                    className={`profile nav-img-${mode}`}
+                    className={`nav-img-${mode}`}
                     // style={{ width: this.props.mode === "medium" ? 100 : 20 }}
                     src={this.props.img_url || defaultImg}
                     // src={userName}

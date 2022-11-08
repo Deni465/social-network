@@ -23,24 +23,48 @@ export default function Chat() {
         setMessage(e.target.value);
     };
 
-    // ...
-    // console.log("messages", messages);
     return (
-        // ...
         <>
-            <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column-reverse",
+                    margin: "20px",
+                    overflowY: "scroll",
+                    height: "40%",
+                    width: "50%",
+                }}
+            >
                 {messages.map((message, index) => (
                     <div key={index}>
                         {" "}
-                        <p>{message.message}</p>
-                        <p>{message.first}</p>
-                        <p>{message.last}</p>
-                        <img src={message.img_url} style={{ width: 50 }}></img>
-                        <p>{message.created_at}</p>
+                        <img
+                            src={message.img_url}
+                            style={{ width: 50, margin: "20px" }}
+                        ></img>
+                        <div
+                            className="text"
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "self-start",
+                            }}
+                        >
+                            {" "}
+                            <p style={{ fontSize: 10 }}>
+                                {message.first} {message.last}
+                            </p>
+                            <p style={{ fontSize: 20 }}>{message.message}</p>
+                            <p style={{ fontSize: 8 }}>{message.created_at} </p>
+                        </div>
                     </div>
                 ))}
             </div>
-            <div className="new-message">
+            <div
+                className="new-message"
+                style={{ display: "flex", justifyContent: "center" }}
+            >
                 {/* <p>{message}</p> */}
                 <textarea
                     name="message"
@@ -48,6 +72,12 @@ export default function Chat() {
                     onKeyDown={(e) => onChatKeyDown(e)}
                     onChange={(e) => onMessageChange(e)}
                     value={message}
+                    style={{
+                        width: "50%",
+                        height: "55px",
+                        resize: "none",
+                        overflowY: "scroll",
+                    }}
                 ></textarea>
             </div>
         </>

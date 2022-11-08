@@ -12,9 +12,11 @@ const Logout = () => {
             });
     };
 
+    const mode = mode || "small";
+
     return (
         <>
-            <div className="container">
+            <div className={`logout-${mode}`}>
                 <div className="button-container">
                     <span className="mask">LOGOUT</span>
                     <button

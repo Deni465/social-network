@@ -38,6 +38,7 @@ export default function App() {
             });
     }, []);
 
+
     const togglePopup = () => {
         // console.log("togglePopup");
         setState({
@@ -61,14 +62,8 @@ export default function App() {
         <>
             <BrowserRouter>
                 <div className="navbar">
-                    <Logo />
-                    <ProfileImg
-                        first={state.user.first}
-                        last={state.user.last}
-                        img_url={state.user.img_url}
-                        togglePopup={togglePopup}
-                        mode="small"
-                    />
+                    <Logo mode="small" />
+
                     <Link className="links" to="/showlatestusers">
                         Find Users
                     </Link>
@@ -81,7 +76,14 @@ export default function App() {
                     <Link className="links" to="/chat">
                         Chat
                     </Link>
-                    <Logout />
+                    <ProfileImg
+                        first={state.user.first}
+                        last={state.user.last}
+                        img_url={state.user.img_url}
+                        togglePopup={togglePopup}
+                        mode="small"
+                    />
+                    <Logout mode="small" />
                     {state.isPopupOpen && (
                         <Uploader
                             setProfilePic={setProfilePic}
@@ -89,7 +91,6 @@ export default function App() {
                         />
                     )}
                 </div>
-                <hr />
                 <Route exact path="/">
                     <Profile
                         first={state.user.first}

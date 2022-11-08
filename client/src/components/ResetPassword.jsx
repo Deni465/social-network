@@ -86,7 +86,11 @@ export default class ResetPassword extends React.Component {
             <>
                 <h2>{"Reset Password"}</h2>
                 <div>
-                    <form method="POST" onSubmit={this.handleSubmit}>
+                    <form
+                        className="register"
+                        method="POST"
+                        onSubmit={this.handleSubmit}
+                    >
                         <div id="secondform">
                             {!this.state.reqSend && (
                                 <>
