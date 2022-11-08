@@ -59,7 +59,11 @@ export default class Login extends React.Component {
             <>
                 <h2>{"Login"}</h2>
                 <div>
-                    <form className="register" method="POST" onSubmit={this.handleSubmit}>
+                    <form
+                        className="register"
+                        method="POST"
+                        onSubmit={this.handleSubmit}
+                    >
                         <div id="secondform">
                             <label htmlFor="email">Email</label>
                             <input
@@ -80,7 +84,10 @@ export default class Login extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-                        <div className="container" style={{display: "flex", justifySelf: "end"}}>
+                        <div
+                            className="container"
+                            style={{ display: "flex", justifySelf: "end" }}
+                        >
                             <div className="button-container">
                                 <span className="mask">LOGIN</span>
                                 <button

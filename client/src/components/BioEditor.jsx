@@ -38,13 +38,13 @@ export default class BioEditor extends Component {
     render() {
         const mode = this.props.mode || "medium";
         return (
-            <div className="bio">
+            <div className="bio-editor">
                 <textarea
                     value={this.state.newBio}
                     onChange={this.onChange}
                     name="textarea"
                     id="bio"
-                    cols="30"
+                    cols="50"
                     rows="10"
                     placeholder="This your Bio! You can write here something about yourself 😊"
                 ></textarea>

@@ -1,4 +1,4 @@
-body {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -37,7 +37,7 @@ body {
     height: 100px;
     width: 100%;
     display: flex;
-    /* margin: 0 10px; */
+    margin: 10px;
 }
 
 .nav-li {
@@ -64,6 +64,9 @@ ul {
     margin: 20px;
     display: flex;
     margin-top: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .myProfile {
@@ -83,12 +86,51 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100px;
+    min-height: 100px;
     align-items: center;
-    width: 50em;
+    width: 35em;
+    margin: 10px;
 }
 
 .userName {
     font-size: 25px;
     font-family: "Satisfy", cursive;
+}
+
+.bio-editor textarea {
+    margin: 15px;
+}
+
+.chat {
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 37px;
+    overflow-y: scroll;
+    height: 40%;
+    /* width: 50em; */
+}
+
+.chat-img {
+    width: 50;
+    margin: 20px;
+    height: 90px;
+}
+
+.chat-textarea {
+    width: 50%;
+    height: 60px;
+    resize: none;
+    overflow-y: scroll;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+
+.chat-info {
+    display: flex;
+    
 }

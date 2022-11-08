@@ -25,31 +25,13 @@ export default function Chat() {
 
     return (
         <>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column-reverse",
-                    margin: "20px",
-                    overflowY: "scroll",
-                    height: "40%",
-                    width: "50%",
-                }}
-            >
+            <div className="chat">
                 {messages.map((message, index) => (
-                    <div key={index}>
+                    <div className="chat-info" key={index}>
                         {" "}
-                        <img
-                            src={message.img_url}
-                            style={{ width: 50, margin: "20px" }}
-                        ></img>
+                        <img className="chat-img" src={message.img_url}></img>
                         <div
                             className="text"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "self-start",
-                            }}
                         >
                             {" "}
                             <p style={{ fontSize: 10 }}>
@@ -61,23 +43,15 @@ export default function Chat() {
                     </div>
                 ))}
             </div>
-            <div
-                className="new-message"
-                style={{ display: "flex", justifyContent: "center" }}
-            >
+            <div className="new-message">
                 {/* <p>{message}</p> */}
                 <textarea
+                    className="chat-textarea"
                     name="message"
                     placeholder="Your message here"
                     onKeyDown={(e) => onChatKeyDown(e)}
                     onChange={(e) => onMessageChange(e)}
                     value={message}
-                    style={{
-                        width: "50%",
-                        height: "55px",
-                        resize: "none",
-                        overflowY: "scroll",
-                    }}
                 ></textarea>
             </div>
         </>

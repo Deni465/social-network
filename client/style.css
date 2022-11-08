@@ -10,6 +10,7 @@ html {
         rgb(224 110 107) 100%
     );
     height: 100%;
+    background-attachment: fixed;
 }
 
 body {
@@ -47,18 +48,18 @@ main {
     /* padding-right: 10em; */
 }
 
-div {
+/* div {
     display: flex;
     justify-content: center;
-}
+} */
 
 #firstform,
 #secondform {
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     margin: 10px;
     font-family: "Satisfy", cursive;
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 .register {
@@ -129,7 +130,7 @@ p {
     /* margin-top: 40vh; */
     overflow: hidden;
     transition: 0.5s;
-    border: 1px solid rgba(255, 255, 255, 0.476);
+    border: 1px solid rgba(188, 188, 188, 0.639);
 }
 .button-container button {
     width: 300px;
@@ -155,7 +156,7 @@ p {
 }
 .mask {
     position: absolute;
-    color: white;
+    color: gray;
     text-align: center;
     width: 101%;
     /* font-family: "Satisfy", cursive; */
