@@ -38,7 +38,6 @@ export default function App() {
             });
     }, []);
 
-
     const togglePopup = () => {
         // console.log("togglePopup");
         setState({
@@ -62,34 +61,52 @@ export default function App() {
         <>
             <BrowserRouter>
                 <div className="navbar">
-                    <Logo mode="small" />
+                    <ul>
+                        <li className="nav-li">
+                            <Logo mode="small" />
+                        </li>
 
-                    <Link className="links" to="/showlatestusers">
-                        Find Users
-                    </Link>
-                    <Link className="links" to="/friendships">
-                        Friends
-                    </Link>
-                    <Link className="links" to="/">
-                        Back To Profile
-                    </Link>
-                    <Link className="links" to="/chat">
-                        Chat
-                    </Link>
-                    <ProfileImg
-                        first={state.user.first}
-                        last={state.user.last}
-                        img_url={state.user.img_url}
-                        togglePopup={togglePopup}
-                        mode="small"
-                    />
-                    <Logout mode="small" />
-                    {state.isPopupOpen && (
-                        <Uploader
-                            setProfilePic={setProfilePic}
-                            togglePopup={togglePopup}
-                        />
-                    )}
+                        <li className="nav-li">
+                            <Link className="links" to="/showlatestusers">
+                                Find Users
+                            </Link>
+                        </li>
+                        <li className="nav-li">
+                            <Link className="links" to="/friendships">
+                                Friends
+                            </Link>
+                        </li>
+                        <li className="nav-li">
+                            <Link className="links" to="/chat">
+                                Chat
+                            </Link>
+                        </li>
+                        <li className="nav-li">
+                            <Link className="links" to="/">
+                                My Profile
+                            </Link>
+                        </li>
+
+                        <li className="nav-li">
+                            <Logout mode="small" />
+                        </li>
+                        <li className="nav-li" id="img">
+                            <ProfileImg
+                                first={state.user.first}
+                                last={state.user.last}
+                                img_url={state.user.img_url}
+                                togglePopup={togglePopup}
+                                mode="small"
+                            />
+                        </li>
+
+                        {state.isPopupOpen && (
+                            <Uploader
+                                setProfilePic={setProfilePic}
+                                togglePopup={togglePopup}
+                            />
+                        )}
+                    </ul>
                 </div>
                 <Route exact path="/">
                     <Profile
@@ -102,6 +119,7 @@ export default function App() {
                         setBio={(updatedBio) => {
                             setBio(updatedBio);
                         }}
+                        mode="small"
                     />
                 </Route>
                 <Route path="/showlatestusers">

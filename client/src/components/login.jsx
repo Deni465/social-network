@@ -80,7 +80,7 @@ export default class Login extends React.Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-                        <div className="container">
+                        <div className="container" style={{display: "flex", justifySelf: "end"}}>
                             <div className="button-container">
                                 <span className="mask">LOGIN</span>
                                 <button

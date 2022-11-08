@@ -29,7 +29,7 @@ export default class Profile extends Component {
     }
 
     render() {
-        const mode = this.props.mode || "medium";
+        const mode = this.props.mode || "smmediumall";
         return (
             <div className="profileHome">
                 <ProfileImg
@@ -40,7 +40,7 @@ export default class Profile extends Component {
                     mode="medium"
                 />
                 <div className="myProfile">
-                    <p>
+                    <p className="userName">
                         {this.props.first} {this.props.last}
                     </p>
 
@@ -52,14 +52,14 @@ export default class Profile extends Component {
                         />
                     )}
                     {!this.state.textareaIsOpen && (
-                        <div>
+                        <div className="bio-editor">
                             <p>{this.props.bio}</p>{" "}
                             {/* <button
                                 className="button"
                                 type="submit"
                                 onClick={this.toggleTextarea}
                             > */}
-                            <div className={`container-${mode}`}>
+                            <div className={`bio-${mode}`}>
                                 <div className="button-container">
                                     <span className="mask">
                                         {" "}

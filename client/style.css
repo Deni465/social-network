@@ -26,9 +26,10 @@ main {
 
 .container {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 75%;
 }
 
 .left {
@@ -43,12 +44,12 @@ main {
     flex: 1;
     padding: 1rem;
     flex-direction: column;
-    padding-right: 10em;
+    /* padding-right: 10em; */
 }
 
 div {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 #firstform,
@@ -62,12 +63,12 @@ div {
 
 .register {
     width: 100%;
-    height: 50vh;
+    height: 500px;
     padding: 10px;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.3);
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     flex-direction: column;
     /* justify-content: space-between; */
 }
@@ -75,6 +76,7 @@ div {
 input {
     padding: 10px;
     border: 0;
+    width: 15em;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
@@ -98,10 +100,20 @@ p {
     margin: 4px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
+    color: black;
+    text-decoration: none;
 }
 
 .logo-medium {
     width: 100vh;
+}
+
+.logout {
+    border: 0;
+    background-color: transparent;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    margin-top: 6px;
 }
 
 /* ------------------- Button */
@@ -112,7 +124,8 @@ p {
     height: 50px;
     margin-left: auto;
     margin-right: auto;
-    align-self: end;
+    /* justify-self: ; */
+    /* align-self: end; */
     /* margin-top: 40vh; */
     overflow: hidden;
     transition: 0.5s;

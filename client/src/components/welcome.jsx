@@ -14,7 +14,7 @@ export default class Welcome extends React.Component {
                     <p>Can Be Your Best Friend Or Your Worst Nightmare</p>
                     <Logo mode="medium" />
                 </div>
-                <div className="right bg">
+                <div className="right">
                     <BrowserRouter>
                         <Route exact path="/">
                             <Registration />

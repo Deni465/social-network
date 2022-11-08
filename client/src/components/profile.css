@@ -10,7 +10,7 @@ body {
 
 .nav-img {
     height: fit-content;
-    margin-left: 15%;
+    /* margin-left: 15%; */
     border: 0;
     background-color: transparent;
 }
@@ -25,10 +25,7 @@ body {
     object-fit: scale-down;
     width: 60px;
     box-shadow: 2px 3px 10px rgb(224 110 107);
-}
-
-.grinch {
-    object-fit: scale-down;
+    display: flex;
 }
 
 .profile {
@@ -38,23 +35,19 @@ body {
 
 .navbar {
     height: 100px;
-    display: flex;
-    box-shadow: 10px 10px 10px rgb(224 110 107);
     width: 100%;
     display: flex;
-    margin: 10px;
+    /* margin: 0 10px; */
 }
 
-/* -------------Logo */
+.nav-li {
+    margin: 0 80px;
+}
 
 .logo-small {
     width: 140px;
     box-shadow: 2px 3px 10px rgb(224 110 107);
     border-radius: 62%;
-}
-
-.logout-small {
-    width: 100px;
 }
 
 .container-small {
@@ -64,4 +57,38 @@ body {
 ul {
     list-style: none;
     display: flex;
+    align-items: center;
+}
+
+.profileHome {
+    margin: 20px;
+    display: flex;
+    margin-top: 6%;
+}
+
+.myProfile {
+    flex-direction: column;
+}
+
+.bio-small,
+.mask,
+.button-container,
+.button-container button {
+    width: 80px;
+    height: 40px;
+    font-size: 12px;
+}
+
+.bio-editor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+    width: 50em;
+}
+
+.userName {
+    font-size: 25px;
+    font-family: "Satisfy", cursive;
 }

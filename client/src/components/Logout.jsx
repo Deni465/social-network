@@ -16,7 +16,7 @@ const Logout = () => {
 
     return (
         <>
-            <div className={`logout-${mode}`}>
+            {/* <div className={`logout-${mode}`}>
                 <div className="button-container">
                     <span className="mask">LOGOUT</span>
                     <button
@@ -28,10 +28,10 @@ const Logout = () => {
                         LOGOUT
                     </button>
                 </div>
-            </div>
-            {/* <button className="button" name="logout" onClick={logout}>
+            </div> */}
+            <button className="logout" name="logout" onClick={logout}>
                 Logout
-            </button> */}
+            </button>
         </>
     );
 };
