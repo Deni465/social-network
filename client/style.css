@@ -29,7 +29,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     width: 75%;
 }
 
@@ -38,6 +38,7 @@ main {
     flex: 1;
     padding: 1rem;
     flex-direction: column;
+    margin-top: 5%;
 }
 
 .right {
@@ -45,6 +46,7 @@ main {
     flex: 1;
     padding: 1rem;
     flex-direction: column;
+    margin-top: 5%;
     /* padding-right: 10em; */
 }
 
@@ -63,7 +65,7 @@ main {
 }
 
 .register {
-    width: 100%;
+    width: 250px;
     height: 500px;
     padding: 10px;
     border: 0;
@@ -74,7 +76,17 @@ main {
     /* justify-content: space-between; */
 }
 
-input {
+.input {
+    padding: 10px;
+    border: 0;
+    width: 15em;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    margin: 20px;
+}
+
+.inputfield {
     padding: 10px;
     border: 0;
     width: 15em;

@@ -81,7 +81,3 @@ export default function FriendshipButton() {
         </>
     );
 }
-
-// enum state{
-//     none = "Request Friendship"
-// }

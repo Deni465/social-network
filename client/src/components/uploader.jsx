@@ -41,7 +41,12 @@ export default function Uploader({ setProfilePic, togglePopup }) {
                     onSubmit={onFormSubmit}
                 >
                     <input name="file" type="file" onChange={onChange} />
-                    <input name="submit" type="submit" value="UPLOAD" />
+                    <input
+                        className="input"
+                        name="submit"
+                        type="submit"
+                        value="UPLOAD"
+                    />
                 </form>
             </div>
         </div>

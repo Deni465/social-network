@@ -2,6 +2,11 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { socket } from "../socket";
 
+const formatter = new Intl.DateTimeFormat(undefined, {
+    dateStyle: "medium",
+    timeStyle: "medium",
+});
+
 export default function Chat() {
     const messages = useSelector((state) => state.messages);
     const [message, setMessage] = useState("");
@@ -30,15 +35,15 @@ export default function Chat() {
                     <div className="chat-info" key={index}>
                         {" "}
                         <img className="chat-img" src={message.img_url}></img>
-                        <div
-                            className="text"
-                        >
+                        <div className="text">
                             {" "}
-                            <p style={{ fontSize: 10 }}>
+                            <p id="chatName">
                                 {message.first} {message.last}
                             </p>
-                            <p style={{ fontSize: 20 }}>{message.message}</p>
-                            <p style={{ fontSize: 8 }}>{message.created_at} </p>
+                            <p id="chatMessage">{message.message}</p>
+                            <p id="chatTimestamp">
+                                {formatter.format(new Date(message.created_at))}{" "}
+                            </p>
                         </div>
                     </div>
                 ))}

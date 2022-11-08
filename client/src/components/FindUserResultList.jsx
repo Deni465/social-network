@@ -13,10 +13,17 @@ export default function FindPeopleResultList({ users }) {
     };
 
     return (
-        <ul>
+        <ul className="findUser">
             {users.map((user) => (
-                <li key={user.id} onClick={() => showProfile(user.id)}>
-                    <Link className="links" to={`/showlatestuser/${user.id}`}>
+                <li
+                    className="userlist"
+                    key={user.id}
+                    onClick={() => showProfile(user.id)}
+                >
+                    <Link
+                        className="links userInfo"
+                        to={`/showlatestuser/${user.id}`}
+                    >
                         <img src={user.img_url} style={{ width: 100 }} />{" "}
                         <p className="links">
                             {user.first} {user.last}

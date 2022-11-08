@@ -41,7 +41,7 @@
 }
 
 .nav-li {
-    margin: 0 80px;
+    margin: 0 60px;
 }
 
 .logo-small {
@@ -71,14 +71,16 @@ ul {
 
 .myProfile {
     flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 
 .bio-small,
 .mask,
 .button-container,
 .button-container button {
-    width: 80px;
-    height: 40px;
+    width: 165px;
+    height: 45px;
     font-size: 12px;
 }
 
@@ -107,8 +109,9 @@ ul {
     flex-direction: column-reverse;
     margin: 37px;
     overflow-y: scroll;
-    height: 40%;
-    /* width: 50em; */
+    height: 70vh;
+    width: 70%;
+    margin: auto;
 }
 
 .chat-img {
@@ -130,7 +133,47 @@ ul {
     align-items: self-start;
 }
 
+.new-message {
+    margin: 20px;
+}
+
 .chat-info {
     display: flex;
-    
+    align-items: center;
+}
+
+#chatName {
+    font-size: 14px;
+}
+
+#chatMessage {
+    font-size: 20px;
+    text-align: justify;
+}
+
+#chatTimestamp {
+    font-size: 10px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: rgb(198, 95, 91) solid 3px; */
+    height: 200px;
+    width: 165px;
+    /* margin: 20px; */
+    box-shadow: 2px 3px 10px rgb(224 110 107);
+}
+
+.findUser {
+    gap: 20px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+
+.friendships {
+    margin-top: 80px;
 }

@@ -8,6 +8,7 @@ export default class ResetPassword extends React.Component {
             password: "",
             code: "",
             reqSend: false,
+            error: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -39,6 +40,12 @@ export default class ResetPassword extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const mailRegEx =
+            /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!mailRegEx.test(this.state.email)) {
+            this.setState({ error: "Invalid E-Mail" });
+            return;
+        }
 
         if (this.state.reqSend) {
             const reqContent = {
@@ -96,6 +103,7 @@ export default class ResetPassword extends React.Component {
                                 <>
                                     <label htmlFor="email">Email</label>
                                     <input
+                                        className="inputfield"
                                         type="text"
                                         name="email"
                                         id="email"
@@ -109,6 +117,7 @@ export default class ResetPassword extends React.Component {
                                 <>
                                     <label htmlFor="code">Code</label>
                                     <input
+                                        className="inputfield"
                                         type="text"
                                         name="code"
                                         id="code"
@@ -117,6 +126,7 @@ export default class ResetPassword extends React.Component {
                                     />
                                     <label htmlFor="password">Password</label>
                                     <input
+                                        className="inputfield"
                                         type="password"
                                         name="password"
                                         id="password"
@@ -138,6 +148,9 @@ export default class ResetPassword extends React.Component {
                                 </button>
                             </div>
                         </div>
+                        {this.state.error.length > 0 && (
+                            <p style={{ color: "red" }}>{this.state.error}</p>
+                        )}
                     </form>
                 </div>
             </>

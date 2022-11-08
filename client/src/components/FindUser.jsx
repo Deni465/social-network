@@ -23,6 +23,7 @@ export default function FindUser() {
             <h1>Find People</h1>
             {/* <p>{userQuery}</p> */}
             <input
+                className="input"
                 type="text"
                 placeholder="search here"
                 onChange={(e) => {

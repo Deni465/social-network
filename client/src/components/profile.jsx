@@ -29,7 +29,7 @@ export default class Profile extends Component {
     }
 
     render() {
-        const mode = this.props.mode || "smmediumall";
+        const mode = this.props.mode || "medium";
         return (
             <div className="profileHome">
                 <ProfileImg

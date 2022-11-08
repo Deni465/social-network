@@ -50,19 +50,20 @@ export default function Friends() {
 
     const container = {
         height: "100px",
+        width: "165px",
     };
 
     return (
         <>
-            <h3>Friendship Requested</h3>
+            <h3 className="friendships">Friendship Requested</h3>
             {pendingrequests && pendingrequests.length > 0 && (
                 <div className="notFriends">
-                    <ul>
+                    <ul className="findUser">
                         {pendingrequests.map((pendingrequests) => (
-                            <li key={pendingrequests.id}>
+                            <li className="userlist" key={pendingrequests.id}>
                                 {" "}
                                 <Link
-                                    className="links"
+                                    className="links userInfo"
                                     to={`/showlatestuser/${pendingrequests.id}`}
                                 >
                                     <img
@@ -80,17 +81,19 @@ export default function Friends() {
                         ))}
                     </ul>
                 </div>
+            )}{" "}
+            {pendingrequests.length == 0 && (
+                <p>No Friendship Requests Right Now</p>
             )}
-
-            <h3>Friendships</h3>
+            <h3 className="friendships">Friendships</h3>
             {friendrequests && friendrequests.length > 0 && (
                 <div className="friends">
-                    <ul>
+                    <ul className="findUser">
                         {friendrequests.map((friendrequests) => (
-                            <li key={friendrequests.id}>
+                            <li className="userlist" key={friendrequests.id}>
                                 {" "}
                                 <Link
-                                    className="links"
+                                    className="links userInfo"
                                     to={`/showlatestuser/${friendrequests.id}`}
                                 >
                                     <img
@@ -102,7 +105,7 @@ export default function Friends() {
                                         {friendrequests.last}
                                     </p>
                                 </Link>
-                                <div className={container}>
+                                <div className="container" style={container}>
                                     <div className="button-container">
                                         <span className="mask">UNFRIEND</span>
                                         <button
@@ -120,6 +123,7 @@ export default function Friends() {
                     </ul>
                 </div>
             )}
+            {friendrequests.length == 0 && <p>No Friendships Yet</p>}
         </>
     );
 }

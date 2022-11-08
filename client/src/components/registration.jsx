@@ -8,6 +8,7 @@ export default class Registration extends React.Component {
             last: "",
             email: "",
             password: "",
+            error: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,6 +53,30 @@ export default class Registration extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const mailRegEx =
+            /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!mailRegEx.test(this.state.email)) {
+            this.setState({ error: "Invalid E-Mail" });
+            return;
+        }
+        if (this.state.password.length < 4) {
+            this.setState({
+                error: "Password Should Have At Least 4 Characters",
+            });
+            return;
+        }
+        if (this.state.first.length == 0) {
+            this.setState({
+                error: "First Name Can't Be Empty",
+            });
+            return;
+        }
+        if (this.state.last.length == 0) {
+            this.setState({
+                error: "Last Name Can't Be Empty",
+            });
+            return;
+        }
         const newUser = {
             first: this.state.first,
             last: this.state.last,
@@ -80,10 +105,15 @@ export default class Registration extends React.Component {
             <>
                 <h2>{"Registration"}</h2>
                 <div className="right">
-                    <form className="register" action="POST" onSubmit={this.handleSubmit}>
+                    <form
+                        className="register"
+                        action="POST"
+                        onSubmit={this.handleSubmit}
+                    >
                         <div id="firstform">
                             <label htmlFor="first">First Name</label>
                             <input
+                                className="inputfield"
                                 type="text"
                                 name="first"
                                 id="first"
@@ -93,6 +123,7 @@ export default class Registration extends React.Component {
                             />
                             <label htmlFor="last">Last Name</label>
                             <input
+                                className="inputfield"
                                 type="text"
                                 name="last"
                                 id="last"
@@ -104,6 +135,7 @@ export default class Registration extends React.Component {
                         <div id="secondform">
                             <label htmlFor="email">Email</label>
                             <input
+                                className="inputfield"
                                 type="text"
                                 name="email"
                                 id="email"
@@ -113,6 +145,7 @@ export default class Registration extends React.Component {
                             />
                             <label htmlFor="password">Password</label>
                             <input
+                                className="inputfield"
                                 type="password"
                                 name="password"
                                 id="password"
@@ -133,6 +166,9 @@ export default class Registration extends React.Component {
                                 </button>
                             </div>
                         </div>
+                        {this.state.error.length > 0 && (
+                            <p style={{ color: "red" }}>{this.state.error}</p>
+                        )}
                     </form>
                 </div>
             </>

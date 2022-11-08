@@ -8,7 +8,7 @@ import Logout from "./Logout.jsx";
 import OtherProfiles from "./OtherProfiles.jsx";
 import Friends from "./Friends.jsx";
 import Chat from "../components/Chat.jsx";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 
 export default function App() {
     const [state, setState] = useState({
@@ -108,39 +108,45 @@ export default function App() {
                         )}
                     </ul>
                 </div>
-                <Route exact path="/">
-                    <Profile
-                        first={state.user.first}
-                        last={state.user.last}
-                        img_url={state.user.img_url}
-                        bio={state.user.bio}
-                        setProfilePic={setProfilePic}
-                        togglePopup={togglePopup}
-                        setBio={(updatedBio) => {
-                            setBio(updatedBio);
-                        }}
-                        mode="small"
-                    />
-                </Route>
-                <Route path="/showlatestusers">
-                    <FindUser />
-                </Route>
+                <Switch>
+                    <Route exact path="/">
+                        <Profile
+                            first={state.user.first}
+                            last={state.user.last}
+                            img_url={state.user.img_url}
+                            bio={state.user.bio}
+                            setProfilePic={setProfilePic}
+                            togglePopup={togglePopup}
+                            setBio={(updatedBio) => {
+                                setBio(updatedBio);
+                            }}
+                            mode="small"
+                        />
+                    </Route>
+                    <Route path="/showlatestusers">
+                        <FindUser />
+                    </Route>
 
-                <Route path="/showlatestuser/:id">
-                    <OtherProfiles
-                        isSessionUser={(id) => {
-                            if (id == state.user.id) {
-                                location.replace("/");
-                            }
-                        }}
-                    />
-                </Route>
-                <Route path="/friendships">
-                    <Friends />
-                </Route>
-                <Route path="/chat">
-                    <Chat />
-                </Route>
+                    <Route path="/showlatestuser/:id">
+                        <OtherProfiles
+                            isSessionUser={(id) => {
+                                if (id == state.user.id) {
+                                    location.replace("/");
+                                }
+                            }}
+                        />
+                    </Route>
+                    <Route path="/friendships">
+                        <Friends />
+                    </Route>
+                    <Route path="/chat">
+                        <Chat />
+                    </Route>
+                    <Route path="*">
+                        {" "}
+                        <Redirect to="/" />
+                    </Route>
+                </Switch>
             </BrowserRouter>
         </>
     );

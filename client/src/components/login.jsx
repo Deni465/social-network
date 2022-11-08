@@ -6,6 +6,7 @@ export default class Login extends React.Component {
         this.state = {
             email: "",
             password: "",
+            error: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -37,6 +38,18 @@ export default class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const mailRegEx =
+            /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!mailRegEx.test(this.state.email)) {
+            this.setState({ error: "Invalid E-Mail" });
+            return;
+        }
+        if (this.state.password.length < 4) {
+            this.setState({
+                error: "Password Should Have At Least 4 Characters",
+            });
+            return;
+        }
         const user = { email: this.state.email, password: this.state.password };
         fetch("/login", {
             method: "POST",
@@ -67,6 +80,7 @@ export default class Login extends React.Component {
                         <div id="secondform">
                             <label htmlFor="email">Email</label>
                             <input
+                                className="inputfield"
                                 type="text"
                                 name="email"
                                 id="email"
@@ -76,6 +90,7 @@ export default class Login extends React.Component {
                             />
                             <label htmlFor="password">Password</label>
                             <input
+                                className="inputfield"
                                 type="password"
                                 name="password"
                                 id="password"
@@ -99,6 +114,9 @@ export default class Login extends React.Component {
                                 </button>
                             </div>
                         </div>
+                        {this.state.error.length > 0 && (
+                            <p style={{ color: "red" }}>{this.state.error}</p>
+                        )}
                         {/* <button className="button" type="submit">
                             Login
                         </button> */}

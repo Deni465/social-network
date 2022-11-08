@@ -18,15 +18,18 @@ export default function OtherProfiles({ isSessionUser }) {
     }, [id]);
 
     return (
-        <>
-            <img src={otherUser.img_url} style={{ width: 100 }}></img>
-            <p>
-                {otherUser.first} {otherUser.last}
-            </p>
-            <p>
-                {otherUser.bio} {otherUser.email}
-            </p>
-            <FriendshipButton />
-        </>
+        <div className="profileHome">
+            <img src={otherUser.img_url} className="nav-img-medium"></img>
+            <div className="myProfile">
+                {" "}
+                <p className="userName">
+                    {otherUser.first} {otherUser.last}
+                </p>
+                <p className="bio-editor">
+                    {otherUser.bio} {otherUser.email}
+                </p>
+                <FriendshipButton />
+            </div>
+        </div>
     );
 }
